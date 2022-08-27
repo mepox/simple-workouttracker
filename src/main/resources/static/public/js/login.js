@@ -39,6 +39,6 @@ function loginUser() {
 }
 
 function clearLoginForm() {
-	document.forms["loginForm"]["username"].value = "";
-	document.forms["loginForm"]["password"].value = "";
+	clearFormValue("loginForm", "username");
+	clearFormValue("loginForm", "password");
 }

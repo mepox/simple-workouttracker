@@ -14,16 +14,21 @@ public class WebSecurityConfig {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf().disable();
 		
-		http.authorizeRequests().mvcMatchers("/secured/**").hasRole("USER");		
+		// User home page
+		http.authorizeRequests().antMatchers("/user/**").hasRole("USER");
 		
-		// URL does not require login		
-		http.authorizeRequests().mvcMatchers("/login").permitAll();
-		http.authorizeRequests().mvcMatchers("/login/perform_login").permitAll();
-		http.authorizeRequests().mvcMatchers("/logout").permitAll();
-		http.authorizeRequests().mvcMatchers("/register").permitAll();
+		// H2 Console
+		http.authorizeRequests().antMatchers("/console/**").permitAll();
+		http.headers().frameOptions().sameOrigin();
 		
-		http.authorizeRequests().mvcMatchers("/public/**").permitAll();
-		// 
+		// URLs does not require login		
+		http.authorizeRequests().antMatchers("/login").permitAll();
+		http.authorizeRequests().antMatchers("/login/perform_login").permitAll();
+		http.authorizeRequests().antMatchers("/logout").permitAll();
+		http.authorizeRequests().antMatchers("/register").permitAll();
+		http.authorizeRequests().antMatchers("/public/**").permitAll();		
+		
+		// Access denied for admin page 
 		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
 		
 		// Configure custom login form

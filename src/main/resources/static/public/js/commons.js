@@ -12,3 +12,7 @@ function showStatus(message) {
         statusMessages[0].hidden = false;	
 	}    
 }
+
+function clearFormValue(formId, valueName) {
+	document.forms[formId][valueName].value = "";	
+}

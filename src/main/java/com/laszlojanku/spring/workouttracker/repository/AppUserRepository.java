@@ -7,7 +7,7 @@ public interface AppUserRepository {
 	public void add(String username, String password, String rolename);
 	public AppUser get(String username);
 	public boolean isExists(String username);
-	public void update(AppUser appUser);
-	public void delete(String username);
+	public boolean update(AppUser appUser);
+	public boolean delete(String username);
 
 }

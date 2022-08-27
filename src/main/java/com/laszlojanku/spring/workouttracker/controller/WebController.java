@@ -8,7 +8,7 @@ public class WebController {
 	
 	@GetMapping("/")
 	public String getHomePage() {
-		return "secured/home.html";
+		return "user/home.html";
 	}
 	
 	@GetMapping("/login")

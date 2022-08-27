@@ -7,6 +7,13 @@ public class AppUser {
 	private String password;
 	private String rolename;
 	
+	public AppUser(int id, String username, String password, String rolename) {		
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.rolename = rolename;
+	}	
+	
 	public int getId() {
 		return id;
 	}

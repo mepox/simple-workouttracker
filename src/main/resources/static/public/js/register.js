@@ -28,12 +28,20 @@ function registerUser() {
 			if (this.status == 200) {
 				// SUCCESS
 				console.log("OK: " + this.responseText);	
-				showStatus(this.responseText);			
+				showStatus(this.responseText);	
+				clearRegisterForm();	
 			} else {
 				// ERROR
 				console.log("ERROR: " + this.responseText);
-				showStatus(this.responseText);				
+				showStatus(this.responseText);
+				clearRegisterForm();				
 			}
 		}		
 	}
+}
+
+function clearRegisterForm() {
+	clearFormValue("registerForm", "username");
+	clearFormValue("registerForm", "password");
+	clearFormValue("registerForm", "passwordConfirm");	
 }

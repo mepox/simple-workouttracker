@@ -24,10 +24,10 @@ public class RegisterController {
 		try {
 			registerService.register(registerForm);
 		} catch (Exception e) {
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		
-		return new ResponseEntity<>("Success. User registered.", HttpStatus.OK);		
+		return new ResponseEntity<String>("Success. User registered.", HttpStatus.OK);		
 	}
 
 }
