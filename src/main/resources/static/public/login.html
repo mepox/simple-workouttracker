@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8"></meta>
+    <meta name="viewport" content="width=device-width"></meta>    
+    <script src="public/js/commons.js"></script>
+    <script src="public/js/login.js"></script>
+    
+	<title>Workout Tracker - Login</title>
+</head>
+
+<body>
+	<h1>Please login</h1>
+	<div id="loginBox">
+		<form id="loginForm" action="javascript:loginUser()">
+			<p class="statusMessage" hidden="true"></p>
+			Username:<br>
+			<input type="text" name="username"><br><br>
+			Password:<br>
+			<input type="password" name="password"><br><br>
+			<a href="/register">Register a new account</a><br><br>
+			<input type="submit" value="Login">
+		</form>	
+	</div>
+	<script>onStart();</script>
+</body>
+
+</html>
