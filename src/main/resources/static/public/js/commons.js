@@ -16,3 +16,13 @@ function showStatus(message) {
 function clearFormValue(formId, valueName) {
 	document.forms[formId][valueName].value = "";	
 }
+
+
+
+function hideDivBox(id) {
+	document.getElementById(id).style = "display:none";	
+}
+
+function showDivBox(id) {
+	document.getElementById(id).style = "display:block";
+}

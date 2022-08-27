@@ -17,6 +17,9 @@ public class WebSecurityConfig {
 		// User home page
 		http.authorizeRequests().antMatchers("/user/**").hasRole("USER");
 		
+		// Admin home page
+		http.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN");
+		
 		// H2 Console
 		http.authorizeRequests().antMatchers("/console/**").permitAll();
 		http.headers().frameOptions().sameOrigin();

@@ -6,6 +6,12 @@ public class RegisterForm {
 	private String password;
 	private String passwordConfirm;
 	
+	public RegisterForm(String username, String password, String passwordConfirm) {		
+		this.username = username;
+		this.password = password;
+		this.passwordConfirm = passwordConfirm;
+	}
+	
 	public String getUsername() {
 		return username;
 	}

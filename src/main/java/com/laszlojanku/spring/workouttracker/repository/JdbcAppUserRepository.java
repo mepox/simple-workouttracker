@@ -17,11 +17,13 @@ public class JdbcAppUserRepository implements AppUserRepository {
 	private JdbcTemplate jdbc;
 
 	@Override
-	public void add(String username, String password, String rolename) throws DataAccessException {
+	public int add(String username, String password, String rolename) throws DataAccessException {
 		String sql = "INSERT INTO appuser (username, password, rolename) VALUES (?, ?, ?)";
 		Object[] params = { username, password, rolename };
 		
-		jdbc.update(sql, params);		
+		jdbc.update(sql, params);
+		
+		return get(username).getId();
 	}
 
 	@Override
