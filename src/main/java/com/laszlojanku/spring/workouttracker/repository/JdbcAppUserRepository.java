@@ -7,7 +7,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.laszlojanku.spring.workouttracker.SimpleWorkoutTrackerApplication;
 import com.laszlojanku.spring.workouttracker.model.AppUser;
 
 @Repository
@@ -36,18 +35,16 @@ public class JdbcAppUserRepository implements AppUserRepository {
 		String sql = "SELECT * FROM appuser WHERE username = ?";
 		Object[] params = { username };
 		
-		Map<String, Object> row = jdbc.queryForMap(sql, params);
-		
-		AppUser appUser = buildAppUserByRow(row);
+		Map<String, Object> map = jdbc.queryForMap(sql, params);
 
-		return appUser;
+		return buildAppUserFromMap(map);
 	}
 	
-	private AppUser buildAppUserByRow(Map<String, Object> row) {	
-		int id = (int)row.get("id");
-		String username = (String)row.get("username");
-		String password = (String)row.get("password");
-		String rolename = (String)row.get("rolename");		
+	private AppUser buildAppUserFromMap(Map<String, Object> map) {	
+		int id = (int)map.get("id");
+		String username = (String)map.get("username");
+		String password = (String)map.get("password");
+		String rolename = (String)map.get("rolename");		
 		
 		return new AppUser(id, username, password, rolename);
 	}
@@ -75,5 +72,5 @@ public class JdbcAppUserRepository implements AppUserRepository {
 		return false;
 		
 	}
-
+	
 }

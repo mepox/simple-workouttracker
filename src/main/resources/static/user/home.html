@@ -12,15 +12,62 @@
 <body>
 	<h1 id="welcomeMessage">Welcome</h1>
 	<div id="menuBox">
-		<input type="button" value="Workout Log" onclick="onWorkoutLogButton()">
-		<input type="button" value="My Exercises" onclick="onMyExercisesButton()">
-		<input type="button" value="Logout" onclick="onLogoutButton()">	
+		<input type="button" value="Workout Log" onclick="showWorkoutLog()">
+		<input type="button" value="My Exercises" onclick="showMyExercises()">
+		<input type="button" value="Logout" onclick="logout()">	
 	</div>
+	<div id="statusMessageBox">
+		<p id="statusMessage" hidden="true"></p>
+	</div><br>
 	<div id="workoutLogBox">
-	workoutbox
+		<div id="calendarBox">
+			<input type="date" id="selectedDate">
+		</div><br>
+		<div id="addExerciseBox">
+			<form id="addExerciseForm" action="javascript:addExercise()">
+				<label>Select an exercise:</label>
+				<select id="exerciseList">
+					<option>exercise one</option>
+					<option>exercise two</option>						
+				</select><br>
+				<label>Weight (kg):</label>
+				<input type="number" name="weight"><br>
+				<label>Reps:</label>
+				<input type="number" name="reps"><br>
+				<input type="submit" value="Add Exercise">		
+			</form>
+		</div><br>
+		<table id="exerciseHistoryTable">
+			<thead>
+				<th>Exercise name</th>
+				<th>Weight</th>
+				<th>Reps</th>				
+			</thead>
+			<tbody>
+				<tr>
+					<td>Flat fos</td>
+					<td>100</td>
+					<td>12</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 	<div id="exercisesBox">
-	exercisesbox
+		<div id="addNewExerciseBox">
+			<form id="newExerciseForm" action="javascript:addNewExercise()">
+				<label>Add new exercise:</label>
+				<input type="text" placeholder="Enter new exercise name" name="newExercise">
+				<input type="submit" value="Add New Exercise">
+			</form>
+		</div>
+		<table id="exercisesTable">
+			<thead>
+				<th>Exercise Name</th>
+				<th>Action</th>
+			</thead>
+			<tbody>
+			</tbody>			
+		</table>
 	</div>
 	<script>onStart();</script>
 </body>

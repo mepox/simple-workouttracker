@@ -1,5 +1,7 @@
 package com.laszlojanku.spring.workouttracker.service;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -7,30 +9,33 @@ import org.springframework.stereotype.Service;
 import com.laszlojanku.spring.workouttracker.SimpleWorkoutTrackerApplication;
 import com.laszlojanku.spring.workouttracker.model.RegisterForm;
 import com.laszlojanku.spring.workouttracker.repository.JdbcAppUserRepository;
-import com.laszlojanku.spring.workouttracker.repository.JdbcExerciseRepository;
+import com.laszlojanku.spring.workouttracker.repository.JdbcExerciseHistoryRepository;
+import com.laszlojanku.spring.workouttracker.repository.JdbcUserExerciseRepository;
 
 @Service
 public class RegisterService {	
 	
 	private JdbcAppUserRepository appUserRepository;
-	private JdbcExerciseRepository exerciseRepository;
+	private JdbcUserExerciseRepository exerciseRepository;	
 	
 	@Autowired
-	public RegisterService(JdbcAppUserRepository appUserRepository, JdbcExerciseRepository exerciseRepository) {
+	public RegisterService(JdbcAppUserRepository appUserRepository, JdbcUserExerciseRepository exerciseRepository, 
+			JdbcExerciseHistoryRepository exerciseHistoryRepository) {
 		this.appUserRepository = appUserRepository;		
 		this.exerciseRepository = exerciseRepository;
 		
 		// Add a default user
 		try {
-			register(new RegisterForm("user", "user", "user"));
+			// Adds a default user with the default exercises
+			int userId = register(new RegisterForm("user", "user", "user"));
+			// Adds few exercise for "today"
+			exerciseHistoryRepository.add(userId, 1, 100, 12, LocalDate.now().toString());
+			exerciseHistoryRepository.add(userId, 1, 100, 11, LocalDate.now().toString());
+			exerciseHistoryRepository.add(userId, 1, 100, 10, LocalDate.now().toString());
 		} catch (Exception e) {			
 			SimpleWorkoutTrackerApplication.logger.warn("Error while trying to add the default user(s): " + e.getMessage());			
-		}		
+		}	
 	}
-	
-	// Add default user and workouts
-
-	// Add default workouts 
 	
 	public int register(RegisterForm registerForm) throws Exception  {
 		// Validate username

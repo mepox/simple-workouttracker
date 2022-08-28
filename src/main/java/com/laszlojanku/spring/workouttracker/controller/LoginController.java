@@ -28,6 +28,6 @@ public class LoginController {
 		}
 		
 		return new ResponseEntity<String>("Login successful.", HttpStatus.OK);		
-	}
+	}	
 
 }

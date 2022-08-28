@@ -22,13 +22,13 @@ import com.laszlojanku.spring.workouttracker.repository.JdbcAppUserRepository;
 public class LoginService {
 	
 	@Autowired
-	private JdbcAppUserRepository repository;
+	private JdbcAppUserRepository appUserRepository;
 	
 	public void login(LoginForm loginForm) throws Exception {
 		AppUser appUser;
 		
 		try {
-			appUser = repository.get(loginForm.getUsername());
+			appUser = appUserRepository.get(loginForm.getUsername());
 		}
 		catch (DataAccessException e) {
 			throw new Exception("Database error.");
