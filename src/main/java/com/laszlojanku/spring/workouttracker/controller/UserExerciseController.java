@@ -60,13 +60,9 @@ public class UserExerciseController {
 	}
 	
 	@DeleteMapping("/user/exercises/delete/{id}")
-	public ResponseEntity<String> delete(@PathVariable("id") int exerciseId, Authentication auth) {
+	public ResponseEntity<String> delete(@PathVariable("id") int id) {
 		try {
-			if (auth == null) {
-				return new ResponseEntity<String>("Couldn't get the username.", HttpStatus.BAD_REQUEST);
-			}
-			int userId = appUserService.getId(auth.getName());
-			userExerciseService.delete(exerciseId, userId);
+			userExerciseService.delete(id);
 		} catch (Exception e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}

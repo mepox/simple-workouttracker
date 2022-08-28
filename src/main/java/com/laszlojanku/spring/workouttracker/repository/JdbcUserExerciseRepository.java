@@ -65,9 +65,9 @@ public class JdbcUserExerciseRepository implements UserExerciseRepository {
 	}
 
 	@Override
-	public boolean delete(String exerciseName, int userId) throws DataAccessException {
-		String sql = "DELETE FROM user_exercise WHERE name = ? and userId = ?";
-		Object[] params = { exerciseName, userId };
+	public boolean delete(int id) throws DataAccessException {
+		String sql = "DELETE FROM user_exercise WHERE id = ?";
+		Object[] params = { id };
 		
 		int rowsDeleted = jdbc.update(sql, params);		
 		

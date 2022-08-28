@@ -7,6 +7,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.laszlojanku.spring.workouttracker.model.UserExercise;
+import com.laszlojanku.spring.workouttracker.repository.JdbcExerciseHistoryRepository;
 import com.laszlojanku.spring.workouttracker.repository.JdbcUserExerciseRepository;
 
 @Service
@@ -14,6 +15,9 @@ public class UserExerciseService {
 	
 	@Autowired
 	private JdbcUserExerciseRepository userExerciseRepository;
+	
+	@Autowired
+	private JdbcExerciseHistoryRepository exerciseHistoryRepository;
 	
 	public void add(String newExerciseName, int userId) throws Exception {
 		// Validate new exercise name, it can be only text
@@ -44,35 +48,18 @@ public class UserExerciseService {
 		
 		return userExercises;
 	}
-	
-	public UserExercise get(String exerciseName, int userId) throws Exception {
-		UserExercise userExercise;
 		
+	public void delete(int id) throws Exception {
+		// First we need to delete the exercise from history (foreign key)
 		try {
-			userExercise = userExerciseRepository.get(exerciseName, userId);
+			exerciseHistoryRepository.deleteByExerciseId(id);
 		} catch (DataAccessException e) {
-			throw new Exception("Exercise not found.");
+			throw new Exception("Database error.");
 		}
 		
-		return userExercise;
-	}
-	
-	public UserExercise get(int exerciseId, int userId) throws Exception {
-		UserExercise userExercise;
-		
-		try {
-			userExercise = userExerciseRepository.get(exerciseId, userId);
-		} catch (DataAccessException e) {
-			throw new Exception("Exercise not found.");
-		}
-		
-		return userExercise;
-	}
-	
-	public void delete(String exerciseName, int userId) throws Exception {
 		boolean isDeleted = false;
 		try {
-			isDeleted = userExerciseRepository.delete(exerciseName, userId);
+			isDeleted = userExerciseRepository.delete(id);
 		} catch (DataAccessException e) {
 			throw new Exception("Database error.");
 		}
@@ -80,10 +67,6 @@ public class UserExerciseService {
 		if (!isDeleted) {
 			throw new Exception("Exercise not found.");
 		}
-	}
-	
-	public void delete(int exerciseId, int userId) throws Exception {
-		delete(get(exerciseId, userId).getName(), userId);
 	}
 
 }

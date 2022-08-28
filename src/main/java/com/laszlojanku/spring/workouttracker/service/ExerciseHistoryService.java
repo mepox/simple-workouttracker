@@ -16,12 +16,23 @@ public class ExerciseHistoryService {
 	@Autowired
 	private JdbcExerciseHistoryRepository exerciseHistoryRepository;
 	
-	public void add(int userId, int exersieId, int weight, int reps, String exercise_date) throws Exception {
+	public void add(int userId, int userExerciseId, int weight, int reps, String exercise_date) throws Exception {
+		
 		try {
-			exerciseHistoryRepository.add(userId, exersieId, weight, reps, exercise_date);
+			exerciseHistoryRepository.add(userId, userExerciseId, weight, reps, exercise_date);
 		} catch (DataAccessException e) {
 			throw new Exception("Database error. Couldn't add new exercise to the history.");
 		}
+	}
+	
+	public void add(ExerciseHistory exerciseHistory) throws Exception {
+		int userId = exerciseHistory.getUserId();
+		int userExerciseId = exerciseHistory.getUserExerciseId();
+		int weight = exerciseHistory.getWeight();
+		int reps = exerciseHistory.getReps();
+		String exercise_date = exerciseHistory.getDate();
+		
+		add(userId, userExerciseId, weight, reps, exercise_date);
 	}
 	
 	public List<ExerciseHistory> getAll(int userId, String exercise_date) throws Exception {

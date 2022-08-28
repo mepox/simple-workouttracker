@@ -16,11 +16,11 @@ CREATE TABLE user_exercise (
 
 CREATE TABLE exercise_history (
 	id INT NOT NULL AUTO_INCREMENT,
-	userId INT,
-	userExerciseId INT,
+	userId INT NOT NULL,
+	userExerciseId INT NOT NULL,
 	weight INT,
 	reps INT NOT NULL,
-	exercise_date DATE,
+	exercise_date VARCHAR(16) NOT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (userId) REFERENCES appuser(id),
 	FOREIGN KEY (userExerciseId) REFERENCES user_exercise(id)

@@ -21,7 +21,9 @@
 	</div><br>
 	<div id="workoutLogBox">
 		<div id="calendarBox">
-			<input type="date" id="selectedDate">
+			<input type="button" id="calendarStepButton" onclick="stepDownCalendar()" value="<<">
+			<input type="date" id="calendar" onchange="onCalendarChange()">
+			<input type="button" id="calendarStepButton" onclick="stepUpCalendar()" value=">>">
 		</div><br>
 		<div id="addExerciseBox">
 			<form id="addExerciseForm" action="javascript:addExercise()">
@@ -31,9 +33,9 @@
 					<option>exercise two</option>						
 				</select><br>
 				<label>Weight (kg):</label>
-				<input type="number" name="weight"><br>
+				<input type="number" name="weight" maxlength="4" size="4"><br>
 				<label>Reps:</label>
-				<input type="number" name="reps"><br>
+				<input type="number" name="reps" maxlength="4" size="4" min="1"><br>
 				<input type="submit" value="Add Exercise">		
 			</form>
 		</div><br>
@@ -41,13 +43,15 @@
 			<thead>
 				<th>Exercise name</th>
 				<th>Weight</th>
-				<th>Reps</th>				
+				<th>Reps</th>
+				<th>Actions</th>				
 			</thead>
 			<tbody>
 				<tr>
 					<td>Flat fos</td>
 					<td>100</td>
 					<td>12</td>
+					<td>X</td>
 				</tr>
 			</tbody>
 		</table>

@@ -1,6 +1,10 @@
 package com.laszlojanku.spring.workouttracker.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,19 +27,49 @@ public class ExerciseHistoryController {
 	@Autowired
 	private ExerciseHistoryService exerciseHistoryService;
 	
-	@GetMapping("/user/history/all")
-	public ResponseEntity<String> getAllByDate(Authentication auth) {
-		return null;
+	@GetMapping("/user/history/{date}")
+	public ResponseEntity<String> getAllByDate(@PathVariable("date") String strDate, Authentication auth) {
+		List<ExerciseHistory> exerciseHistoryList = new ArrayList<ExerciseHistory>();
+		
+		try {
+			if (auth == null) {
+				return new ResponseEntity<String>("Couldn't get the username.", HttpStatus.BAD_REQUEST);
+			}
+			int userId = appUserService.getId(auth.getName());
+			exerciseHistoryList = exerciseHistoryService.getAll(userId, strDate);		
+			
+		} catch (Exception e) {
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		
+		return new ResponseEntity<String>(exerciseHistoryList.toString(), HttpStatus.OK);
 	}
 	
 	@PostMapping("/user/history/add")
 	public ResponseEntity<String> add(@RequestBody ExerciseHistory exerciseHistory, Authentication auth) {
-		return null;
+		try {
+			if (auth == null) {
+				return new ResponseEntity<String>("Couldn't get the username.", HttpStatus.BAD_REQUEST);
+			}
+			// Get and apply the userId
+			exerciseHistory.setUserId(appUserService.getId(auth.getName()));
+			exerciseHistoryService.add(exerciseHistory);
+		} catch (Exception e) {
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		
+		return new ResponseEntity<String>("New exercise added to the history.", HttpStatus.OK);	
 	}
 	
 	@DeleteMapping("/user/history/delete/{id}")
-	public ResponseEntity<String> delete(@PathVariable("id") int id, Authentication auth) {
-		return null;		
+	public ResponseEntity<String> delete(@PathVariable("id") int id) {
+		try {			
+			exerciseHistoryService.delete(id);
+		} catch (Exception e) {
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		
+		return new ResponseEntity<String>("Exercise deleted.", HttpStatus.OK);		
 	}
 
 }

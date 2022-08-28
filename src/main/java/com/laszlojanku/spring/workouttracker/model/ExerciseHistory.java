@@ -4,7 +4,7 @@ public class ExerciseHistory {
 	
 	private int id;
 	private int userId;
-	private int userExerciseId;
+	private int userExerciseId;	
 	private int weight;
 	private int reps;
 	private String date;
@@ -44,6 +44,12 @@ public class ExerciseHistory {
 	}
 	public void setDate(String date) {
 		this.date = date;
+	}
+	
+	@Override
+	public String toString() {
+		return "{ \"id\" : \"" + id + "\", \"userId\" : \"" + userId + "\", \"userExerciseId\" : \"" + userExerciseId + "\", \"weight\" : \""
+				+ weight + "\", \"reps\" : \"" + reps + "\", \"date\" : \"" + date + "\" }";
 	}
 
 }

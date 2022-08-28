@@ -66,5 +66,15 @@ public class JdbcExerciseHistoryRepository implements ExerciseHistoryRepository 
 		
 		return (rowsDeleted > 0) ? true : false;
 	}
+	
+	@Override
+	public boolean deleteByExerciseId(int exerciseId) throws DataAccessException {
+		String sql = "DELETE FROM exercise_history WHERE userExerciseId = ?";
+		Object[] params = { exerciseId };
+		
+		int rowsDeleted = jdbc.update(sql, params);
+		
+		return (rowsDeleted > 0) ? true : false;		
+	}
 
 }
