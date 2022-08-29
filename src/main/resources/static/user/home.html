@@ -38,7 +38,7 @@
 					<label>Weight (kg):</label>
 					<input type="number" name="weight" maxlength="4" size="4"><br><br>
 					<label>Reps:</label>
-					<input type="number" name="reps" maxlength="4" size="4" min="1"><br><br>
+					<input type="number" name="reps" maxlength="4" size="4" min="1" required><br><br>
 					<input type="submit" class="blueButton" value="Add Exercise">		
 				</form>
 			</div><br>
@@ -57,7 +57,7 @@
 			<br><div id="addNewExerciseBox">
 				<form id="newExerciseForm" action="javascript:addNewExercise()">
 					<label>Add new exercise:</label>
-					<input type="text" placeholder="Enter new exercise name" name="newExercise"><br><br>
+					<input type="text" placeholder="Enter new exercise name" name="newExercise" min="1" required><br><br>
 					<input type="submit" class="blueButton" value="Add New Exercise">
 					<br>
 				</form>
