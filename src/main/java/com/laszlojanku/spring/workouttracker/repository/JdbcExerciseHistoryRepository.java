@@ -11,6 +11,9 @@ import org.springframework.stereotype.Repository;
 
 import com.laszlojanku.spring.workouttracker.model.ExerciseHistory;
 
+/**
+ * Repository using JdbcTemplate to manipulate ExerciseHistory in the database.
+ */
 @Repository
 public class JdbcExerciseHistoryRepository implements ExerciseHistoryRepository {
 	

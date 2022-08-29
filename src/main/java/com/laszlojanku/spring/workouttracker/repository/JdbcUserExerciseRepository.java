@@ -11,12 +11,21 @@ import org.springframework.stereotype.Repository;
 
 import com.laszlojanku.spring.workouttracker.model.UserExercise;
 
+/**
+ * Repository using JdbcTemplate to manipulate UserExercise in the database.
+ */
 @Repository
 public class JdbcUserExerciseRepository implements UserExerciseRepository {
 
 	@Autowired
 	private JdbcTemplate jdbc;
-
+	
+	/**
+	 * Adds a new UserExercise to the database.
+	 * @param	exerciseName	new exercise's name
+	 * @param	userId			user's id who owns this exercise
+	 * @throws					DataAccessException on database error
+	 */
 	@Override
 	public void add(String exerciseName, int userId) throws DataAccessException {		
 		String sql = "INSERT INTO user_exercise (name, userId) VALUES (?, ?)";
@@ -25,6 +34,12 @@ public class JdbcUserExerciseRepository implements UserExerciseRepository {
 		jdbc.update(sql, params);
 	}
 	
+	/**
+	 * Gets all the UserExercises that belongs to a specific user from the database.
+	 * @param	userId	user's id
+	 * @return			list of all UserExercises that the user has
+	 * @throws			DataAccessException on database error
+	 */	
 	@Override
 	public List<UserExercise> getAll(int userId) throws DataAccessException {
 		List<UserExercise> userExercises = new ArrayList<UserExercise>();
@@ -53,7 +68,14 @@ public class JdbcUserExerciseRepository implements UserExerciseRepository {
 		
 		return userExercise;		
 	}
-
+	
+	/**
+	 * Checks if an exercise exists for a user in the database.
+	 * @param	exerciseName	exercise's name
+	 * @param	userId			user's id
+	 * @return					true if exists
+	 * @throws					DataAccessException on database error
+	 */
 	@Override
 	public boolean isExists(String exerciseName, int userId) throws DataAccessException {
 		String sql = "SELECT count(*) FROM user_exercise WHERE name = ? AND userId = ?";
@@ -63,7 +85,13 @@ public class JdbcUserExerciseRepository implements UserExerciseRepository {
 		
 		return (count > 0) ? true : false;
 	}
-
+	
+	/**
+	 * Deletes a UserExercise by id from the database.
+	 * @param	id	UserExercise's id
+	 * @return		true if successful
+	 * @throws		DataAccessException on database error
+	 */
 	@Override
 	public boolean delete(int id) throws DataAccessException {
 		String sql = "DELETE FROM user_exercise WHERE id = ?";
@@ -73,7 +101,14 @@ public class JdbcUserExerciseRepository implements UserExerciseRepository {
 		
 		return (rowsDeleted > 0) ? true : false;
 	}
-
+	
+	/**
+	 * Gets a UserExercise that belongs to a specific user from the database.
+	 * @param	exerciseName	exercise's name
+	 * @param	userId			user's id
+	 * @return					UserExercise
+	 * @throws					DataAccessException on database error
+	 */
 	@Override
 	public UserExercise get(String exerciseName, int userId) throws DataAccessException {
 		String sql = "SELECT * FROM user_exercise WHERE name = ? AND userId = ?";
@@ -83,7 +118,14 @@ public class JdbcUserExerciseRepository implements UserExerciseRepository {
 		
 		return buildFromMap(map);
 	}
-
+	
+	/**
+	 * Gets a UserExercise that belongs to a specific user from the database.
+	 * @param	exerciseId		exercise's id
+	 * @param	userId			user's id
+	 * @return					UserExercise
+	 * @throws					DataAccessException on database error
+	 */
 	@Override
 	public UserExercise get(int exerciseId, int userId) throws DataAccessException {
 		String sql = "SELECT * FROM user_exercise WHERE id = ? AND userId = ?";
