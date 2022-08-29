@@ -17,13 +17,20 @@ import com.laszlojanku.spring.workouttracker.model.AppUser;
 import com.laszlojanku.spring.workouttracker.model.LoginForm;
 import com.laszlojanku.spring.workouttracker.repository.JdbcAppUserRepository;
 
-
+/**
+ * Provides a service to handle the logging in process.
+ */
 @Service
 public class LoginService {
 	
 	@Autowired
 	private JdbcAppUserRepository appUserRepository;
 	
+	/**
+	 * Log-in the user using the LoginForm.
+	 * @param	loginForm	LoginForm object
+	 * @throws 				Exception if something went wrong
+	 */
 	public void login(LoginForm loginForm) throws Exception {
 		AppUser appUser;
 		
@@ -42,7 +49,7 @@ public class LoginService {
 			throw new Exception("Incorrect password.");			
 		}
 		
-		// Username and password is correct, so login the user
+		// Username and password are correct, so now login the user
 		
 		// Create the GrantedAuthority list
 		List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();

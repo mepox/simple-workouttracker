@@ -7,12 +7,21 @@ import org.springframework.stereotype.Service;
 import com.laszlojanku.spring.workouttracker.model.AppUser;
 import com.laszlojanku.spring.workouttracker.repository.JdbcAppUserRepository;
 
+/**
+ * Provides a service to manipulate AppUsers in the database.
+ */
 @Service
 public class AppUserService {
 	
 	@Autowired
 	private JdbcAppUserRepository appUserRepository;
 	
+	/**
+	 * Gets an AppUser's id by username from the database.
+	 * @param	username	username
+	 * @return				AppUser's id
+	 * @throws 				Exception if something went wrong
+	 */
 	public int getId(String username) throws Exception {
 		AppUser appUser;
 		
@@ -24,7 +33,5 @@ public class AppUserService {
 		
 		return appUser.getId();
 	}
-	
-	
 
 }

@@ -12,6 +12,9 @@ import com.laszlojanku.spring.workouttracker.repository.JdbcAppUserRepository;
 import com.laszlojanku.spring.workouttracker.repository.JdbcExerciseHistoryRepository;
 import com.laszlojanku.spring.workouttracker.repository.JdbcUserExerciseRepository;
 
+/**
+ * Provides a service to handle the registering process.
+ */
 @Service
 public class RegisterService {	
 	
@@ -37,6 +40,12 @@ public class RegisterService {
 		}	
 	}
 	
+	/**
+	 * Registers a new user using the RegisterForm.
+	 * @param	registerForm	RegisterForm object
+	 * @return					the new user's id
+	 * @throws 					Exception if something went wrong
+	 */
 	public int register(RegisterForm registerForm) throws Exception  {
 		// Validate username
 		validateUsername(registerForm.getUsername());
