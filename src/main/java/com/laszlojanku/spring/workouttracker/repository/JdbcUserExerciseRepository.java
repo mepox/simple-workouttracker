@@ -29,9 +29,8 @@ public class JdbcUserExerciseRepository implements UserExerciseRepository {
 	@Override
 	public void add(String exerciseName, int userId) throws DataAccessException {		
 		String sql = "INSERT INTO user_exercise (name, userId) VALUES (?, ?)";
-		Object[] params = { exerciseName, userId };
 		
-		jdbc.update(sql, params);
+		jdbc.update(sql, exerciseName, userId);
 	}
 	
 	/**
@@ -46,9 +45,8 @@ public class JdbcUserExerciseRepository implements UserExerciseRepository {
 		List<Map<String, Object>> mapList = new ArrayList<Map<String, Object>>();
 		
 		String sql = "SELECT * FROM user_exercise WHERE userId = ?";
-		Object[] params = { userId };
 		
-		mapList = jdbc.queryForList(sql, params);
+		mapList = jdbc.queryForList(sql, userId);
 		
 		if (mapList != null) {
 			for (Map<String, Object> map : mapList) {
@@ -79,9 +77,8 @@ public class JdbcUserExerciseRepository implements UserExerciseRepository {
 	@Override
 	public boolean isExists(String exerciseName, int userId) throws DataAccessException {
 		String sql = "SELECT count(*) FROM user_exercise WHERE name = ? AND userId = ?";
-		Object[] params = { exerciseName, userId };
 		
-		int count = jdbc.queryForObject(sql, Integer.class, params);
+		int count = jdbc.queryForObject(sql, Integer.class, exerciseName, userId);
 		
 		return (count > 0) ? true : false;
 	}
@@ -95,9 +92,8 @@ public class JdbcUserExerciseRepository implements UserExerciseRepository {
 	@Override
 	public boolean delete(int id) throws DataAccessException {
 		String sql = "DELETE FROM user_exercise WHERE id = ?";
-		Object[] params = { id };
 		
-		int rowsDeleted = jdbc.update(sql, params);		
+		int rowsDeleted = jdbc.update(sql, id);		
 		
 		return (rowsDeleted > 0) ? true : false;
 	}
@@ -112,9 +108,8 @@ public class JdbcUserExerciseRepository implements UserExerciseRepository {
 	@Override
 	public UserExercise get(String exerciseName, int userId) throws DataAccessException {
 		String sql = "SELECT * FROM user_exercise WHERE name = ? AND userId = ?";
-		Object[] params = { exerciseName, userId };
 		
-		Map<String, Object> map = jdbc.queryForMap(sql, params);
+		Map<String, Object> map = jdbc.queryForMap(sql, exerciseName, userId);
 		
 		return buildFromMap(map);
 	}
@@ -129,9 +124,8 @@ public class JdbcUserExerciseRepository implements UserExerciseRepository {
 	@Override
 	public UserExercise get(int exerciseId, int userId) throws DataAccessException {
 		String sql = "SELECT * FROM user_exercise WHERE id = ? AND userId = ?";
-		Object[] params = { exerciseId, userId };
 		
-		Map<String, Object> map = jdbc.queryForMap(sql, params);
+		Map<String, Object> map = jdbc.queryForMap(sql, exerciseId, userId);
 		
 		return buildFromMap(map);
 	}

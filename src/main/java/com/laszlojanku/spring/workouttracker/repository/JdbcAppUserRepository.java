@@ -29,9 +29,8 @@ public class JdbcAppUserRepository implements AppUserRepository {
 	@Override
 	public int add(String username, String password, String rolename) throws DataAccessException {
 		String sql = "INSERT INTO appuser (username, password, rolename) VALUES (?, ?, ?)";
-		Object[] params = { username, password, rolename };
 		
-		jdbc.update(sql, params);
+		jdbc.update(sql, username, password, rolename);
 		
 		return get(username).getId();
 	}
@@ -49,10 +48,9 @@ public class JdbcAppUserRepository implements AppUserRepository {
 			return null;
 		}
 		
-		String sql = "SELECT * FROM appuser WHERE username = ?";
-		Object[] params = { username };
+		String sql = "SELECT * FROM appuser WHERE username = ?";		
 		
-		Map<String, Object> map = jdbc.queryForMap(sql, params);
+		Map<String, Object> map = jdbc.queryForMap(sql, username);
 
 		return buildAppUserFromMap(map);
 	}
@@ -75,9 +73,8 @@ public class JdbcAppUserRepository implements AppUserRepository {
 	@Override
 	public boolean isExists(String username) throws DataAccessException {
 		String sql = "SELECT count(*) FROM appuser WHERE username = ?";
-		Object[] params = { username };
 		
-		int count = jdbc.queryForObject(sql, Integer.class, params);
+		int count = jdbc.queryForObject(sql, Integer.class, username);
 		
 		return (count > 0) ? true : false;		
 	}

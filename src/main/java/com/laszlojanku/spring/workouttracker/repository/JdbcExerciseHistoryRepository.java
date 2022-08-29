@@ -23,9 +23,8 @@ public class JdbcExerciseHistoryRepository implements ExerciseHistoryRepository 
 	@Override
 	public void add(int userId, int userExerciseId, int weight, int reps, String exercise_date) throws DataAccessException {
 		String sql = "INSERT INTO exercise_history (userId, userExerciseId, weight, reps, exercise_date) VALUES (?, ?, ?, ?, ?)";
-		Object[] params = { userId, userExerciseId, weight, reps, exercise_date };
 		
-		jdbc.update(sql, params);
+		jdbc.update(sql, userId, userExerciseId, weight, reps, exercise_date);
 	}
 
 	@Override
@@ -34,9 +33,8 @@ public class JdbcExerciseHistoryRepository implements ExerciseHistoryRepository 
 		List<Map<String, Object>> mapList = new ArrayList<Map<String, Object>>();
 		
 		String sql = "SELECT * FROM exercise_history WHERE userId = ? AND exercise_date = ?";
-		Object[] params = { userId, exercise_date };
 		
-		mapList = jdbc.queryForList(sql, params);
+		mapList = jdbc.queryForList(sql, userId, exercise_date);
 		
 		if (mapList != null) {
 			for (Map<String, Object> map : mapList) {
@@ -63,9 +61,8 @@ public class JdbcExerciseHistoryRepository implements ExerciseHistoryRepository 
 	@Override
 	public boolean delete(int id) throws DataAccessException {
 		String sql = "DELETE FROM exercise_history WHERE id = ?";
-		Object[] params = { id };
 		
-		int rowsDeleted = jdbc.update(sql, params);
+		int rowsDeleted = jdbc.update(sql, id);
 		
 		return (rowsDeleted > 0) ? true : false;
 	}
@@ -73,9 +70,8 @@ public class JdbcExerciseHistoryRepository implements ExerciseHistoryRepository 
 	@Override
 	public boolean deleteByExerciseId(int exerciseId) throws DataAccessException {
 		String sql = "DELETE FROM exercise_history WHERE userExerciseId = ?";
-		Object[] params = { exerciseId };
 		
-		int rowsDeleted = jdbc.update(sql, params);
+		int rowsDeleted = jdbc.update(sql, exerciseId);
 		
 		return (rowsDeleted > 0) ? true : false;		
 	}
