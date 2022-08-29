@@ -3,7 +3,8 @@
 
 <head>
 	<meta charset="utf-8"></meta>
-    <meta name="viewport" content="width=device-width"></meta>    
+    <meta name="viewport" content="width=device-width"></meta>
+    <link rel="stylesheet" href="public/css/commons.css">
     <script src="public/js/commons.js"></script>
     <script src="public/js/login.js"></script>
     
@@ -11,8 +12,9 @@
 </head>
 
 <body>
-	<h1>Please login</h1>
-	<div id="loginBox">
+	<h1 class="center">Workout Tracker</h1>
+	<div class="center" id="loginBox">
+		<h2>Please login</h1>
 		<form id="loginForm" action="javascript:loginUser()">
 			<p id="statusMessage" hidden="true"></p>
 			Username:<br>
@@ -20,8 +22,9 @@
 			Password:<br>
 			<input type="password" name="password" required><br><br>
 			<a href="/register">Register a new account</a><br><br>
-			<input type="submit" value="Login">
-		</form>	
+			<input type="submit" class="blueButton" value="Login">
+		</form>
+		<br>	
 	</div>
 	<script>onStart();</script>
 </body>

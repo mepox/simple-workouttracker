@@ -4,14 +4,16 @@
 <head>
 	<meta charset="utf-8"></meta>
     <meta name="viewport" content="width=device-width"></meta>
+    <link rel="stylesheet" href="public/css/commons.css">
     <script src="public/js/commons.js"></script>        
     <script src="public/js/register.js"></script>    
 	<title>Workout Tracker - Register</title>
 </head>
 
 <body>
-	<h1>Register your own account</h1>
-	<div id="registerBox">
+	<h1 class="center">Workout Tracker</h1>
+	<div class="center" id="registerBox">
+		<h2>Register your own account</h2>
 		<form id="registerForm" action="javascript:registerUser()">
 			<p id="statusMessage" hidden="true"></p>
 			Username:<br>
@@ -21,8 +23,8 @@
 			Confirm Password:<br>
 			<input type="password" name="passwordConfirm" required><br><br>
 			<a href="/login">Back to login</a><br><br>
-			<input type="submit" value="Register">
-		</form>	
+			<input type="submit" class="blueButton" value="Register">
+		</form><br>	
 	</div>
 	<script>onStart();</script>
 </body>

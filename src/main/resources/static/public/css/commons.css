@@ -1,0 +1,23 @@
+.center {
+	text-align: center;
+}
+
+#loginBox, #registerBox {
+	border: 2px solid black;
+	width: 25%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.blueButton {
+	background-color: dodgerblue;
+	color: white;
+	border: 1px solid black;
+	border-radius: 4px;
+	font-size: 14px;
+	padding: 5px 15px;	
+}
+
+.blueButton:hover {
+	background-color: darkblue;
+}
