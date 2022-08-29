@@ -9,8 +9,6 @@ function loginUser() {
 	username = username.trim();
 	password = password.trim();
 	
-	// todo validation
-	
 	var url = window.location + "/perform_login";	
 	console.log("url: " + url);
 	var object = { username : username,

@@ -11,8 +11,6 @@ function registerUser() {
 	password = password.trim();
 	passwordConfirm = passwordConfirm.trim();
 	
-	// todo validation
-	
 	var url = "/register";
 	var object = { username : username,
 					password : password,
@@ -28,14 +26,12 @@ function registerUser() {
 			if (this.status == 200) {
 				// SUCCESS
 				console.log("OK: " + this.responseText);	
-				showStatus(this.responseText);	
-				clearRegisterForm();	
 			} else {
 				// ERROR
-				console.log("ERROR: " + this.responseText);
-				showStatus(this.responseText);
-				clearRegisterForm();				
+				console.log("ERROR: " + this.responseText);		
 			}
+			showStatus(this.responseText);
+			clearRegisterForm();		
 		}		
 	}
 }

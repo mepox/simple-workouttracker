@@ -8,7 +8,7 @@ function resetCalendar() {
 	// Set calendar for the current date    
     var today = new Date();
 	var dd = String(today.getDate()).padStart(2, '0');
-	var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+	var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
 	var yyyy = today.getFullYear();
 	today = yyyy + "-" + mm + "-" + dd;
 	
@@ -28,7 +28,6 @@ function stepDownCalendar() {
 	document.getElementById("calendar").stepDown();
 	onCalendarChange();
 }
-
 
 function logout() {	
 	window.location += "logout";	
@@ -73,7 +72,7 @@ function refreshOptionsList() {
 				
 				exerciseList.innerHTML = toAdd;
 				
-				// Refresh the history
+				// Refresh the history too
 				refreshHistory(userExercises);
 			} else {
 				// ERROR
@@ -328,7 +327,7 @@ function showWelcomeMessage() {
 		if (this.readyState == XMLHttpRequest.DONE) {
 			if (this.status == 200) {
 				// SUCCESS				
-				console.log("OK: " + this.responseText);
+				console.log("Logged in as: " + this.responseText);
 				document.getElementById("welcomeMessage").innerText = "Welcome " + this.responseText;
 			} else {
 				// ERROR
