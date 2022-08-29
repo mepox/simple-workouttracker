@@ -9,7 +9,7 @@ CREATE TABLE appuser (
 CREATE TABLE user_exercise (
 	id INT NOT NULL AUTO_INCREMENT,
 	name VARCHAR(32) NOT NULL,
-	userId INT,	
+	userId INT NOT NULL,	
 	PRIMARY KEY (id),
 	FOREIGN KEY (userId) REFERENCES appuser(id)
 );
