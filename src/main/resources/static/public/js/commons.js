@@ -1,6 +1,6 @@
 function hideStatus() {
     var statusMessage = document.getElementById("statusMessage");
-    statusMessage.hidden = true;	
+    statusMessage.hidden = true;    	
 }
 
 function showStatus(message) {

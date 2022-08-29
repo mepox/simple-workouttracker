@@ -1,0 +1,56 @@
+.centerTable {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#trackerBox {
+	border: 2px solid black;
+	width: 30%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.redButton {
+	background-color: red;
+	color: white;
+	border: 1px solid black;
+}
+
+.redButton:hover {
+	background-color: darkred;
+}
+
+.logoutButton {
+	background-color: red;
+	color: white;
+	border: 1px solid black;
+	border-radius: 4px;
+	font-size: 14px;
+	padding: 5px 15px;	
+}
+
+.logoutButton:hover {
+	background-color: darkred;
+}
+
+.menuButton {
+	background-color: dodgerblue;
+	color: white;
+	border: 1px solid black;
+	border-radius: 4px;
+	font-size: 14px;
+	padding: 5px 15px;	
+}
+
+.menuButton:hover {
+	background-color: darkblue;
+}
+
+.menuButtonSelected {
+	background-color: darkblue;
+	color: white;
+	border: 1px solid black;
+	border-radius: 4px;
+	font-size: 14px;
+	padding: 5px 15px;	
+}

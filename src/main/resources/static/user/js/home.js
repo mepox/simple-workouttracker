@@ -1,5 +1,6 @@
 function onStart() {
 	showWelcomeMessage();
+	showStatus("Ready.");
 	resetCalendar();
 	showWorkoutLog();	
 }
@@ -36,6 +37,9 @@ function logout() {
 function showWorkoutLog() {
 	showDivBox("workoutLogBox");
 	hideDivBox("exercisesBox");
+	
+	document.getElementById("workoutLogButton").className = "menuButtonSelected";
+	document.getElementById("myexercisesButton").className = "menuButton";
 	
 	// Refresh the options list	first
 	// This will also refresh the history when it's done
@@ -125,7 +129,7 @@ function refreshHistory(userExercises) {
 					toAdd += "<td>" + data[i].weight + "</td><td>" + data[i].reps + "</td>";		
 					
 					// Add actions
-					toAdd += "<td><input type='button' class='deleteButton' value='Delete' onclick=deleteExerciseHistory(" + 
+					toAdd += "<td><input type='button' class='redButton' value='Delete' onclick=deleteExerciseHistory(" + 
 						data[i].id + ")></td></tr>";
 				}
 					
@@ -233,6 +237,9 @@ function showMyExercises() {
 	hideDivBox("workoutLogBox");
 	showDivBox("exercisesBox");	
 	
+	document.getElementById("workoutLogButton").className = "menuButton";
+	document.getElementById("myexercisesButton").className = "menuButtonSelected";
+	
 	var url = "/user/exercises/all";
     var xhr = new XMLHttpRequest();
 
@@ -256,7 +263,7 @@ function showMyExercises() {
         		
         		for (var i = 0; i < data.length; i++) {
 					toAdd += "<tr><td>" + data[i].name + "</td>" +
-						"<td><input type='button' class='deleteButton' value='Delete' onclick=deleteUserExercise(" + data[i].id + ")></td></tr>";
+						"<td><input type='button' class='redButton' value='Delete' onclick=deleteUserExercise(" + data[i].id + ")></td></tr>";
 				}
 				
 				tbody.innerHTML = toAdd;

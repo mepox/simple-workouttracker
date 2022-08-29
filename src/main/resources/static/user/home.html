@@ -3,75 +3,74 @@
 
 <head>
 	<meta charset="utf-8"></meta>
-    <meta name="viewport" content="width=device-width"></meta>    
+    <meta name="viewport" content="width=device-width"></meta>
+    <link rel="stylesheet" href="public/css/commons.css">
+    <link rel="stylesheet" href="user/css/home.css">   
     <script src="public/js/commons.js"></script>
     <script src="user/js/home.js"></script>   
 	<title>Workout Tracker - Home</title>
 </head>
 
 <body>
-	<h1 id="welcomeMessage">Welcome</h1>
-	<div id="menuBox">
-		<input type="button" value="Workout Log" onclick="showWorkoutLog()">
-		<input type="button" value="My Exercises" onclick="showMyExercises()">
-		<input type="button" value="Logout" onclick="logout()">	
-	</div>
-	<div id="statusMessageBox">
-		<p id="statusMessage" hidden="true"></p>
-	</div><br>
-	<div id="workoutLogBox">
-		<div id="calendarBox">
-			<input type="button" id="calendarStepButton" onclick="stepDownCalendar()" value="<<">
-			<input type="date" id="calendar" onchange="onCalendarChange()">
-			<input type="button" id="calendarStepButton" onclick="stepUpCalendar()" value=">>">
-		</div><br>
-		<div id="addExerciseBox">
-			<form id="addExerciseForm" action="javascript:addExercise()">
-				<label>Select an exercise:</label>
-				<select id="exerciseList">
-					<option>exercise one</option>
-					<option>exercise two</option>						
-				</select><br>
-				<label>Weight (kg):</label>
-				<input type="number" name="weight" maxlength="4" size="4"><br>
-				<label>Reps:</label>
-				<input type="number" name="reps" maxlength="4" size="4" min="1"><br>
-				<input type="submit" value="Add Exercise">		
-			</form>
-		</div><br>
-		<table id="exerciseHistoryTable">
-			<thead>
-				<th>Exercise name</th>
-				<th>Weight</th>
-				<th>Reps</th>
-				<th>Actions</th>				
-			</thead>
-			<tbody>
-				<tr>
-					<td>Flat fos</td>
-					<td>100</td>
-					<td>12</td>
-					<td>X</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	<div id="exercisesBox">
-		<div id="addNewExerciseBox">
-			<form id="newExerciseForm" action="javascript:addNewExercise()">
-				<label>Add new exercise:</label>
-				<input type="text" placeholder="Enter new exercise name" name="newExercise">
-				<input type="submit" value="Add New Exercise">
-			</form>
+	<h1 id="welcomeMessage" class="center">Welcome</h1>
+	<div id="menuBox" class="center">
+			<input type="button" id="workoutLogButton" class="menuButton" value="Workout Log" onclick="showWorkoutLog()">
+			<input type="button" id="myexercisesButton" class="menuButton" value="My Exercises" onclick="showMyExercises()">
+			<input type="button" class="logoutButton" value="Logout" onclick="logout()">	
 		</div>
-		<table id="exercisesTable">
-			<thead>
-				<th>Exercise Name</th>
-				<th>Action</th>
-			</thead>
-			<tbody>
-			</tbody>			
-		</table>
+		<div id="statusMessageBox" class="center">
+			<p id="statusMessage" hidden="true"></p>
+		</div>
+	<div id="trackerBox" class="center">
+		<div id="workoutLogBox">
+			<br><div id="calendarBox">
+				<input type="button" id="calendarStepButton" class="blueButton" onclick="stepDownCalendar()" value="<<">
+				<input type="date" id="calendar" onchange="onCalendarChange()"> 
+				<input type="button" id="calendarStepButton" class="blueButton" onclick="stepUpCalendar()" value=">>">
+			</div><br>
+			<div id="addExerciseBox">
+				<form id="addExerciseForm" action="javascript:addExercise()">
+					<label>Select an exercise:</label>
+					<select id="exerciseList">
+						<option>exercise one</option>
+						<option>exercise two</option>						
+					</select><br><br>
+					<label>Weight (kg):</label>
+					<input type="number" name="weight" maxlength="4" size="4"><br><br>
+					<label>Reps:</label>
+					<input type="number" name="reps" maxlength="4" size="4" min="1"><br><br>
+					<input type="submit" class="blueButton" value="Add Exercise">		
+				</form>
+			</div><br>
+			<table id="exerciseHistoryTable" class="centerTable">
+				<thead>
+					<th>Exercise name</th>
+					<th>Weight</th>
+					<th>Reps</th>
+					<th>Actions</th>				
+				</thead>
+				<tbody>
+				</tbody>
+			</table><br>
+		</div>
+		<div id="exercisesBox">
+			<br><div id="addNewExerciseBox">
+				<form id="newExerciseForm" action="javascript:addNewExercise()">
+					<label>Add new exercise:</label>
+					<input type="text" placeholder="Enter new exercise name" name="newExercise"><br><br>
+					<input type="submit" class="blueButton" value="Add New Exercise">
+					<br>
+				</form>
+			</div><br>
+			<table id="exercisesTable" class="centerTable">
+				<thead>
+					<th>Exercise Name</th>
+					<th>Action</th>
+				</thead>
+				<tbody>
+				</tbody>			
+			</table><br>
+		</div>
 	</div>
 	<script>onStart();</script>
 </body>
