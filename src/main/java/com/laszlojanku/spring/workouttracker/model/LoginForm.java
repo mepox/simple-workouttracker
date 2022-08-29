@@ -1,5 +1,8 @@
 package com.laszlojanku.spring.workouttracker.model;
 
+/**
+ * Represent the LoginForm.
+ */
 public class LoginForm {
 	
 	private String username;

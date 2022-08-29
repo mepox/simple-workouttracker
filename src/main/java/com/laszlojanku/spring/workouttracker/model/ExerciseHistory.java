@@ -1,5 +1,8 @@
 package com.laszlojanku.spring.workouttracker.model;
 
+/**
+ * Represent the ExerciseHistory.
+ */
 public class ExerciseHistory {	
 	
 	private int id;
@@ -46,6 +49,10 @@ public class ExerciseHistory {
 		this.date = date;
 	}
 	
+	/**
+	 * Returns the object's fields in JSON String.
+	 * @return JSON String
+	 */
 	@Override
 	public String toString() {
 		return "{ \"id\" : \"" + id + "\", \"userId\" : \"" + userId + "\", \"userExerciseId\" : \"" + userExerciseId + "\", \"weight\" : \""

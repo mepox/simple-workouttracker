@@ -1,5 +1,8 @@
 package com.laszlojanku.spring.workouttracker.model;
 
+/**
+ * Represent the AppUser.
+ */
 public class AppUser {
 	
 	private int id;

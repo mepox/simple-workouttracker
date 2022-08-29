@@ -1,5 +1,8 @@
 package com.laszlojanku.spring.workouttracker.model;
 
+/**
+ * Represent the RegisterForm.
+ */
 public class RegisterForm {
 	
 	private String username;
