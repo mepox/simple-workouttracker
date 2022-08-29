@@ -11,12 +11,20 @@ import com.laszlojanku.spring.workouttracker.SimpleWorkoutTrackerApplication;
 import com.laszlojanku.spring.workouttracker.model.LoginForm;
 import com.laszlojanku.spring.workouttracker.service.LoginService;
 
+/**
+ * Handles the client's REST calls that are related to logging in.
+ */
 @RestController
 public class LoginController {
 	
 	@Autowired
 	private LoginService loginService;
 	
+	/**
+	 * Handles the client request to login.
+	 * @param	loginForm	LoginForm object sent by the client
+	 * @return				status message and HttpStatus
+	 */	
 	@PostMapping("/login/perform_login")
 	public ResponseEntity<String> loginUser(@RequestBody LoginForm loginForm) {
 		SimpleWorkoutTrackerApplication.logger.info("Trying to login with: " + loginForm.toString());

@@ -18,6 +18,11 @@ import com.laszlojanku.spring.workouttracker.model.UserExercise;
 import com.laszlojanku.spring.workouttracker.service.AppUserService;
 import com.laszlojanku.spring.workouttracker.service.UserExerciseService;
 
+/**
+ * Handles the client's REST calls that are related to the User's exercises.
+ * 
+ * UserExercise can be added and deleted. Also all UserExercise can be retrieved.
+ */
 @RestController
 public class UserExerciseController {
 	
@@ -27,6 +32,11 @@ public class UserExerciseController {
 	@Autowired
 	private UserExerciseService userExerciseService;
 	
+	/**
+	 * Handles the client request to retrieve all the UserExercises.
+	 * @param	auth	Authentication token sent by the client
+	 * @return			List of all UserExercise in JSON String and HttpStatus
+	 */
 	@GetMapping("/user/exercises/all")
 	public ResponseEntity<String> getAll(Authentication auth) {		
 		List<UserExercise> userExercises = new ArrayList<UserExercise>();
@@ -44,6 +54,12 @@ public class UserExerciseController {
 		return new ResponseEntity<String>(userExercises.toString(), HttpStatus.OK);	
 	}
 	
+	/**
+	 * Handles the client request to add a new exercise.
+	 * @param	newExerciseName	the new exercise's name
+	 * @param	auth			Authentication token sent by the client
+	 * @return					status message and HttpStatus
+	 */
 	@PostMapping("/user/exercises/new")
 	public ResponseEntity<String> add(@RequestBody String newExerciseName, Authentication auth) {
 		try {
@@ -59,6 +75,11 @@ public class UserExerciseController {
 		return new ResponseEntity<String>("Added a new exercise: " + newExerciseName, HttpStatus.OK);			
 	}
 	
+	/**
+	 * Handles the client request the delete a UserExercise
+	 * @param	id	the id of the UserExercise
+	 * @return		status message and HttpStatus
+	 */
 	@DeleteMapping("/user/exercises/delete/{id}")
 	public ResponseEntity<String> delete(@PathVariable("id") int id) {
 		try {

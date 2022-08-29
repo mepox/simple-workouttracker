@@ -18,6 +18,11 @@ import com.laszlojanku.spring.workouttracker.model.ExerciseHistory;
 import com.laszlojanku.spring.workouttracker.service.AppUserService;
 import com.laszlojanku.spring.workouttracker.service.ExerciseHistoryService;
 
+/**
+ * Handles the client's REST calls that are related to the ExerciseHistory.
+ * 
+ * ExerciseHistory can be added, deleted or retrieved by a date.
+ */
 @RestController
 public class ExerciseHistoryController {
 	
@@ -27,6 +32,12 @@ public class ExerciseHistoryController {
 	@Autowired
 	private ExerciseHistoryService exerciseHistoryService;
 	
+	/**
+	 * Handles the client request to retrieve all the ExerciseHistory from a specific date 
+	 * @param	strDate	the requested date as a String in yyyy-MM-dd format
+	 * @param	auth	Authentication token received from the client
+	 * @return			List of all ExerciseHistory on the specific date in a JSON String format and a HttpStatus
+	 */	
 	@GetMapping("/user/history/{date}")
 	public ResponseEntity<String> getAllByDate(@PathVariable("date") String strDate, Authentication auth) {
 		List<ExerciseHistory> exerciseHistoryList = new ArrayList<ExerciseHistory>();
@@ -45,6 +56,12 @@ public class ExerciseHistoryController {
 		return new ResponseEntity<String>(exerciseHistoryList.toString(), HttpStatus.OK);
 	}
 	
+	/**
+	 * Handles the client request to add a new ExerciseHistory
+	 * @param	exerciseHistory	an ExerciseHistory object sent by the client
+	 * @param 	auth			Authentication token sent by the client
+	 * @return					status message and HttpStatus
+	 */	
 	@PostMapping("/user/history/add")
 	public ResponseEntity<String> add(@RequestBody ExerciseHistory exerciseHistory, Authentication auth) {
 		try {
@@ -61,6 +78,11 @@ public class ExerciseHistoryController {
 		return new ResponseEntity<String>("New exercise added to the history.", HttpStatus.OK);	
 	}
 	
+	/**
+	 * Handles the client request to delete an ExerciseHistory
+	 * @param	id	the id of the ExerciseHistory to be deleted
+	 * @return		status message and HttpStatus
+	 */	
 	@DeleteMapping("/user/history/delete/{id}")
 	public ResponseEntity<String> delete(@PathVariable("id") int id) {
 		try {			

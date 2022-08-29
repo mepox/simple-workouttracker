@@ -6,6 +6,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
+/**
+ * WebSecurity configuration class where we set up our SecurityFilterChain. 
+ */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
@@ -14,10 +17,10 @@ public class WebSecurityConfig {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf().disable();
 		
-		// User home page
+		// User's page
 		http.authorizeRequests().antMatchers("/user/**").hasRole("USER");
 		
-		// Admin home page
+		// Admin's page
 		http.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN");
 		
 		// H2 Console
@@ -31,12 +34,12 @@ public class WebSecurityConfig {
 		http.authorizeRequests().antMatchers("/register").permitAll();
 		http.authorizeRequests().antMatchers("/public/**").permitAll();		
 		
-		// Access denied for admin page 
+		// Access denied for Admin's page 
 		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
 		
 		// Configure custom login form
 		http.authorizeRequests().and().formLogin()
-				.loginPage("/login"); 		// Set the login page URL				
+				.loginPage("/login"); 		// Sets the login page URL				
 		
 		http.authorizeRequests().anyRequest().authenticated();
 		

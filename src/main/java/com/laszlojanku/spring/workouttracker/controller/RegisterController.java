@@ -11,12 +11,20 @@ import com.laszlojanku.spring.workouttracker.SimpleWorkoutTrackerApplication;
 import com.laszlojanku.spring.workouttracker.model.RegisterForm;
 import com.laszlojanku.spring.workouttracker.service.RegisterService;
 
+/**
+ * Handles the client's REST calls that are related to registering.
+ */
 @RestController
 public class RegisterController {
 	
 	@Autowired
 	private RegisterService registerService;
-
+	
+	/**
+	 * Handles the client request to register.
+	 * @param	registerForm	RegisterForm object sent by the client
+	 * @return					status message and HttpStatus
+	 */
 	@PostMapping("/register")
 	public ResponseEntity<String> registerUser(@RequestBody RegisterForm registerForm) {
 		SimpleWorkoutTrackerApplication.logger.info("Trying to register: " + registerForm.toString());
