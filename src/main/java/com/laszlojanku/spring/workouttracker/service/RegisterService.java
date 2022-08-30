@@ -1,7 +1,10 @@
 package com.laszlojanku.spring.workouttracker.service;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -84,7 +87,11 @@ public class RegisterService {
 		}
 		
 		// Add default exercises to the new user
-		addDefaultExercisesToNewAppUser(userId);
+		try {
+			addDefaultExercisesToNewAppUser(userId);
+		} catch (IOException e) {
+			throw new Exception("Error while trying to add the default exercises for the new user.");
+		}		
 		
 		return userId;
 	}
@@ -99,20 +106,17 @@ public class RegisterService {
 				
 	}
 	
-	private void addDefaultExercisesToNewAppUser(int userId) {
-		ClassPathResource cpr = new ClassPathResource("default_exercises.txt");
-		try {
-			File file = cpr.getFile();
-			Scanner sc = new Scanner(file);
-			
-			while (sc.hasNextLine()) {
-				String exercise = sc.nextLine();
-				exerciseRepository.add(exercise, userId);
-			}
-		} catch (Exception e) {
-			SimpleWorkoutTrackerApplication.logger.warn("Error while trying to add the default exercises to the new user (id): " + userId);
-			e.printStackTrace();
-		}		
+	private void addDefaultExercisesToNewAppUser(int userId) throws IOException {
+		InputStream inputStream;
+		BufferedReader reader;
+		
+		
+		inputStream = new ClassPathResource("default_exercises.txt").getInputStream();
+		reader = new BufferedReader(new InputStreamReader(inputStream));
+		while (reader.ready()) {
+			String exercise = reader.readLine();
+			exerciseRepository.add(exercise, userId);
+		}
 	}
 
 }
