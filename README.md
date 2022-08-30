@@ -2,13 +2,27 @@
 
 A simple Workout Tracker made with Spring Boot. 
 
-![Alt text](screenshot.jpg?raw=true "URL Shortener")
+![Alt text](screenshot1.jpg?raw=true "Workout Tracker")
+![Alt text](screenshot2.jpg?raw=true "Workout Tracker")
 
 ## Features
-- 
+- User can register and login to the application.
+- User can manage their own exercises (add and delete).
+- User can log their workout by adding their own exercises to a specific date.
 
 ## Installation 
 The project is created with Maven, so you just need to import it to your IDE and build the project to resolve the dependencies.
+
+## Running the application
+
+A default user with some preloaded data is added at the start of the application.
+
+```
+username: user
+password: user
+```
+
+Each newly registered user comes with some default exercises.
 
 ## Live Preview
 The app is hosted on Heroku: 
@@ -26,42 +40,7 @@ spring.datasource.username=admin
 spring.datasource.password=admin
 ```
 
-<details><summary>schema.sql</summary>
-<p>
-
-```
-CREATE TABLE appuser (
-	id INT NOT NULL AUTO_INCREMENT,
-	username VARCHAR(16) NOT NULL,
-	password VARCHAR(16) NOT NULL,
-	rolename VARCHAR(16) NOT NULL,
-	PRIMARY KEY (id)
-);
-
-CREATE TABLE user_exercise (
-	id INT NOT NULL AUTO_INCREMENT,
-	name VARCHAR(32) NOT NULL,
-	userId INT NOT NULL,	
-	PRIMARY KEY (id),
-	FOREIGN KEY (userId) REFERENCES appuser(id)
-);
-
-CREATE TABLE exercise_history (
-	id INT NOT NULL AUTO_INCREMENT,
-	userId INT NOT NULL,
-	userExerciseId INT NOT NULL,
-	weight INT,
-	reps INT NOT NULL,
-	exercise_date VARCHAR(16) NOT NULL,
-	PRIMARY KEY (id),
-	FOREIGN KEY (userId) REFERENCES appuser(id),
-	FOREIGN KEY (userExerciseId) REFERENCES user_exercise(id)
-);
-```
-</p>
-</details>
-
-# How it works
+# Overview
 
 ## Configs
 Configurations for the application.
@@ -137,3 +116,40 @@ Responsible for manipulating the UserExercises in the database using JdbcTemplat
 
 ### JdbcExerciseHistoryRepository.java
 Responsible for manipulating the ExerciseHistory in the database using JdbcTemplate.
+
+## Database
+
+<details><summary>schema.sql</summary>
+<p>
+
+```
+CREATE TABLE appuser (
+	id INT NOT NULL AUTO_INCREMENT,
+	username VARCHAR(16) NOT NULL,
+	password VARCHAR(16) NOT NULL,
+	rolename VARCHAR(16) NOT NULL,
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE user_exercise (
+	id INT NOT NULL AUTO_INCREMENT,
+	name VARCHAR(32) NOT NULL,
+	userId INT NOT NULL,	
+	PRIMARY KEY (id),
+	FOREIGN KEY (userId) REFERENCES appuser(id)
+);
+
+CREATE TABLE exercise_history (
+	id INT NOT NULL AUTO_INCREMENT,
+	userId INT NOT NULL,
+	userExerciseId INT NOT NULL,
+	weight INT,
+	reps INT NOT NULL,
+	exercise_date VARCHAR(16) NOT NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY (userId) REFERENCES appuser(id),
+	FOREIGN KEY (userExerciseId) REFERENCES user_exercise(id)
+);
+```
+</p>
+</details>
