@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.dao.DataAccessException;
@@ -99,9 +100,9 @@ public class RegisterService {
 	}
 	
 	private void addDefaultExercisesToNewAppUser(int userId) {
-		Resource resource = resourceLoader.getResource("classpath:default_exercises.txt");
+		ClassPathResource cpr = new ClassPathResource("default_exercises.txt");
 		try {
-			File file = resource.getFile();
+			File file = cpr.getFile();
 			Scanner sc = new Scanner(file);
 			
 			while (sc.hasNextLine()) {
