@@ -22,7 +22,7 @@ username: user
 password: user
 ```
 
-Each newly registered user comes with some default exercises.
+Each newly registered user comes with some default exercises which are read from the file: ```default_exercises.txt```
 
 ## Live Preview
 The app is hosted on Heroku: 
