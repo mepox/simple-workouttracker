@@ -25,7 +25,7 @@ password: user
 Each newly registered user comes with some default exercises which are read from the file: ```default_exercises.txt```
 
 ## Live Preview
-The app is hosted on Heroku: 
+The app is hosted on Heroku: https://spring-workouttracker.herokuapp.com
 
 ## Data Storage
 It uses an in-memory (H2) database to store the data.
