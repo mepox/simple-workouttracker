@@ -3,6 +3,10 @@
 	margin-right: auto;
 }
 
+table {
+	border-spacing: 10px;
+}
+
 #trackerBox {
 	border: 2px solid black;
 	width: 30%;
