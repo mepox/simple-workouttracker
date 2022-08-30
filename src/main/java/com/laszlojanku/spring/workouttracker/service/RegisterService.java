@@ -1,8 +1,13 @@
 package com.laszlojanku.spring.workouttracker.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -16,16 +21,18 @@ import com.laszlojanku.spring.workouttracker.repository.JdbcUserExerciseReposito
  * Provides a service to handle the registering process.
  */
 @Service
-public class RegisterService {	
+public class RegisterService {
 	
 	private JdbcAppUserRepository appUserRepository;
-	private JdbcUserExerciseRepository exerciseRepository;	
+	private JdbcUserExerciseRepository exerciseRepository;
+	private ResourceLoader resourceLoader;
 	
 	@Autowired
 	public RegisterService(JdbcAppUserRepository appUserRepository, JdbcUserExerciseRepository exerciseRepository, 
-			JdbcExerciseHistoryRepository exerciseHistoryRepository) {
+			JdbcExerciseHistoryRepository exerciseHistoryRepository, ResourceLoader resourceLoader) {
 		this.appUserRepository = appUserRepository;		
 		this.exerciseRepository = exerciseRepository;
+		this.resourceLoader = resourceLoader;
 		
 		// Add a default user
 		try {
@@ -35,6 +42,10 @@ public class RegisterService {
 			exerciseHistoryRepository.add(userId, 1, 100, 12, LocalDate.now().toString());
 			exerciseHistoryRepository.add(userId, 1, 100, 11, LocalDate.now().toString());
 			exerciseHistoryRepository.add(userId, 1, 100, 10, LocalDate.now().toString());
+			
+			exerciseHistoryRepository.add(userId, 2, 60, 12, LocalDate.now().toString());
+			exerciseHistoryRepository.add(userId, 2, 60, 11, LocalDate.now().toString());
+			exerciseHistoryRepository.add(userId, 2, 60, 10, LocalDate.now().toString());
 		} catch (Exception e) {			
 			SimpleWorkoutTrackerApplication.logger.warn("Error while trying to add the default user(s): " + e.getMessage());			
 		}	
@@ -87,9 +98,20 @@ public class RegisterService {
 				
 	}
 	
-	private void addDefaultExercisesToNewAppUser(int userId) {		
-		exerciseRepository.add("Flat Barbell Bench Press", userId);
-		exerciseRepository.add("Incline Barbell Bench Press", userId);
+	private void addDefaultExercisesToNewAppUser(int userId) {
+		Resource resource = resourceLoader.getResource("classpath:default_exercises.txt");
+		try {
+			File file = resource.getFile();
+			Scanner sc = new Scanner(file);
+			
+			while (sc.hasNextLine()) {
+				String exercise = sc.nextLine();
+				exerciseRepository.add(exercise, userId);
+			}
+		} catch (Exception e) {
+			SimpleWorkoutTrackerApplication.logger.warn("Error while trying to add the default exercises to the new user (id): " + userId);
+			e.printStackTrace();
+		}		
 	}
 
 }
