@@ -19,7 +19,7 @@ import com.laszlojanku.spring.workouttracker.service.AppUserService;
 import com.laszlojanku.spring.workouttracker.service.ExerciseHistoryService;
 
 /**
- * Handles the client's REST calls that are related to the ExerciseHistory.
+ * Handles the client's REST API requests that are related to the ExerciseHistory.
  * 
  * ExerciseHistory can be added, deleted or retrieved by a date.
  */
@@ -33,7 +33,7 @@ public class ExerciseHistoryController {
 	private ExerciseHistoryService exerciseHistoryService;
 	
 	/**
-	 * Handles the client request to retrieve all the ExerciseHistory from a specific date 
+	 * Handles the client GET request to retrieve all the ExerciseHistory from a specific date 
 	 * @param	strDate	the requested date as a String in yyyy-MM-dd format
 	 * @param	auth	Authentication token received from the client
 	 * @return			List of all ExerciseHistory on the specific date in a JSON String format and a HttpStatus
@@ -57,7 +57,7 @@ public class ExerciseHistoryController {
 	}
 	
 	/**
-	 * Handles the client request to add a new ExerciseHistory
+	 * Handles the client POST request to add a new ExerciseHistory
 	 * @param	exerciseHistory	an ExerciseHistory object sent by the client
 	 * @param 	auth			Authentication token sent by the client
 	 * @return					status message and HttpStatus
@@ -79,7 +79,7 @@ public class ExerciseHistoryController {
 	}
 	
 	/**
-	 * Handles the client request to delete an ExerciseHistory
+	 * Handles the client DELETE request to delete an ExerciseHistory
 	 * @param	id	the id of the ExerciseHistory to be deleted
 	 * @return		status message and HttpStatus
 	 */	

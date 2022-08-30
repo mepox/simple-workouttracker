@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Handles the client's REST calls that are related to the AppUser.
+ * Handles the client's REST API requests that are related to the AppUser.
  */
 @RestController
 public class AppUserController {
 	
 	/**
-	 * Handles the client request to retrieve the current user's name.
+	 * Handles the client GET requests to retrieve the current user's name.
 	 * @param	auth	Authentication token received from the client
 	 * @return			user's name or an error message		
 	 */	

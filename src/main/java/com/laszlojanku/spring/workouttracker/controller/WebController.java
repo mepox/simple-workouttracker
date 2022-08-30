@@ -3,6 +3,10 @@ package com.laszlojanku.spring.workouttracker.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+/**
+ * Maps the client's REST API requests to a html page.
+ */
+
 @Controller
 public class WebController {
 	

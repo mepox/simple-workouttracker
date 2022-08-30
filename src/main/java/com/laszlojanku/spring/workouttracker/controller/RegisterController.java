@@ -12,7 +12,7 @@ import com.laszlojanku.spring.workouttracker.model.RegisterForm;
 import com.laszlojanku.spring.workouttracker.service.RegisterService;
 
 /**
- * Handles the client's REST calls that are related to registering.
+ * Handles the client's REST API requests that are related to registering.
  */
 @RestController
 public class RegisterController {
@@ -21,7 +21,7 @@ public class RegisterController {
 	private RegisterService registerService;
 	
 	/**
-	 * Handles the client request to register.
+	 * Handles the client POST request to register.
 	 * @param	registerForm	RegisterForm object sent by the client
 	 * @return					status message and HttpStatus
 	 */

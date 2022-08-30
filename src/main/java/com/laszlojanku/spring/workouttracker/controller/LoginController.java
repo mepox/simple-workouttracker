@@ -12,7 +12,7 @@ import com.laszlojanku.spring.workouttracker.model.LoginForm;
 import com.laszlojanku.spring.workouttracker.service.LoginService;
 
 /**
- * Handles the client's REST calls that are related to logging in.
+ * Handles the client's REST API requests that are related to logging in.
  */
 @RestController
 public class LoginController {
@@ -21,7 +21,7 @@ public class LoginController {
 	private LoginService loginService;
 	
 	/**
-	 * Handles the client request to login.
+	 * Handles the client POST request to login.
 	 * @param	loginForm	LoginForm object sent by the client
 	 * @return				status message and HttpStatus
 	 */	
