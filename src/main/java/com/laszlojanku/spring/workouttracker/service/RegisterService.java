@@ -97,13 +97,15 @@ public class RegisterService {
 	}
 	
 	private void validateUsername(String username) throws Exception  {
-		if (username.contains("!")) {
-			throw new Exception("Username cannot contain special characters.");						
+		boolean result = username.matches("[a-zA-Z]+");
+		
+		if (!result) {
+			throw new Exception("Username can only contain alphabets characters.");						
 		}
 	}
 	
 	private void validatePassword(String password) {
-				
+		// todo				
 	}
 	
 	private void addDefaultExercisesToNewAppUser(int userId) throws IOException {
