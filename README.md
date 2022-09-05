@@ -6,9 +6,9 @@ A simple Workout Tracker made with Spring Boot.
 ![Alt text](screenshot2.jpg?raw=true "Workout Tracker")
 
 ## Features
-- User can register and login to the application.
-- User can manage their own exercises (add and delete).
-- User can log their workout by adding their own exercises to a specific date.
+- Users can register and login to the application.
+- Users can create their custom exercises.
+- Users can log their workout by adding their own custom exercises to a specific date.
 
 ## Installation 
 The project is created with Maven, so you just need to import it to your IDE and build the project to resolve the dependencies.
