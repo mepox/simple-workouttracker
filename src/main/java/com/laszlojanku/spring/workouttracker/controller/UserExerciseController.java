@@ -38,13 +38,14 @@ public class UserExerciseController {
 	 * @return			List of all UserExercise in JSON String and HttpStatus
 	 */
 	@GetMapping("/user/exercises/all")
-	public ResponseEntity<String> getAll(Authentication auth) {		
+	public ResponseEntity<String> getAll(Authentication auth) {	
+		if (auth == null) {
+			return new ResponseEntity<String>("Couldn't get the username.", HttpStatus.BAD_REQUEST);
+		}
+		
 		List<UserExercise> userExercises = new ArrayList<UserExercise>();
 		
 		try {
-			if (auth == null) {
-				return new ResponseEntity<String>("Couldn't get the username.", HttpStatus.BAD_REQUEST);
-			}
 			int userId = appUserService.getId(auth.getName());
 			userExercises = userExerciseService.getAll(userId);
 		} catch (Exception e ) {
@@ -62,10 +63,11 @@ public class UserExerciseController {
 	 */
 	@PostMapping("/user/exercises/new")
 	public ResponseEntity<String> add(@RequestBody String newExerciseName, Authentication auth) {
+		if (auth == null) {
+			return new ResponseEntity<String>("Couldn't get the username.", HttpStatus.BAD_REQUEST);
+		}
+		
 		try {
-			if (auth == null) {
-				return new ResponseEntity<String>("Couldn't get the username.", HttpStatus.BAD_REQUEST);
-			}
 			int userId = appUserService.getId(auth.getName());
 			userExerciseService.add(newExerciseName, userId);
 		} catch (Exception e) {

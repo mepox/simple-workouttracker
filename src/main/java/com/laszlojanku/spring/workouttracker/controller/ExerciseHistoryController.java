@@ -40,12 +40,13 @@ public class ExerciseHistoryController {
 	 */	
 	@GetMapping("/user/history/{date}")
 	public ResponseEntity<String> getAllByDate(@PathVariable("date") String strDate, Authentication auth) {
+		if (auth == null) {
+			return new ResponseEntity<String>("Couldn't get the username.", HttpStatus.BAD_REQUEST);
+		}
+		
 		List<ExerciseHistory> exerciseHistoryList = new ArrayList<ExerciseHistory>();
 		
 		try {
-			if (auth == null) {
-				return new ResponseEntity<String>("Couldn't get the username.", HttpStatus.BAD_REQUEST);
-			}
 			int userId = appUserService.getId(auth.getName());
 			exerciseHistoryList = exerciseHistoryService.getAll(userId, strDate);		
 			
@@ -64,10 +65,11 @@ public class ExerciseHistoryController {
 	 */	
 	@PostMapping("/user/history/add")
 	public ResponseEntity<String> add(@RequestBody ExerciseHistory exerciseHistory, Authentication auth) {
+		if (auth == null) {
+			return new ResponseEntity<String>("Couldn't get the username.", HttpStatus.BAD_REQUEST);
+		}
+		
 		try {
-			if (auth == null) {
-				return new ResponseEntity<String>("Couldn't get the username.", HttpStatus.BAD_REQUEST);
-			}
 			// Get and apply the userId
 			exerciseHistory.setUserId(appUserService.getId(auth.getName()));
 			exerciseHistoryService.add(exerciseHistory);
