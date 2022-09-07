@@ -63,8 +63,6 @@ spring.datasource.username=admin
 spring.datasource.password=admin
 ```
 
-## Database
-
 <details><summary>schema.sql</summary>
 <p>
 
@@ -99,3 +97,25 @@ CREATE TABLE exercise_history (
 ```
 </p>
 </details>
+
+## Endpoints
+AppUserController:
+- GET requests to ```/user/username``` to retrieve the current user's name.
+
+ExerciseHistoryController:
+- GET requests to ```/user/history/{date}``` to retrieve all the ExerciseHistory from a specific date.
+- POST requests to ```/user/history/add``` to add a new ExerciseHistory.
+- DELETE requests to ```/user/history/delete/{id}``` to delete an ExerciseHistory.
+
+LoginController:
+- POST requests to ```/login/perform_login``` to handle the login using the LoginForm model.
+
+RegisterController:
+- POST requests to ```/register``` to handle the registering using the RegisterForm model.
+
+UserExerciseController:
+- GET requests to ```/user/exercises/all``` to retrieve all the UserExercise.
+- POST requests to ```/user/exercises/new``` to add a new exercise.
+
+WebController:
+- Maps the client's GET requests to a html page.
