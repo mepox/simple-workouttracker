@@ -11,6 +11,7 @@ The project uses the following technologies:
 - Spring Boot
 - Spring Security
 - HTML, CSS and JavaScript
+- SQL
 - Maven
 
 ## Features
