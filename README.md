@@ -5,10 +5,33 @@ A simple Workout Tracker made with Spring Boot.
 ![Alt text](screenshot1.jpg?raw=true "Workout Tracker")
 ![Alt text](screenshot2.jpg?raw=true "Workout Tracker")
 
+## What's inside
+The project uses the following technologies:
+- Java 11
+- Spring Boot
+- Spring Security
+- HTML, CSS and JavaScript
+- Maven
+
 ## Features
 - Users can register and login to the application.
 - Users can create their custom exercises.
 - Users can log their workout by adding their own custom exercises to a specific date.
+
+## Overview
+The service uses Controller - Service - Repository pattern:
+
+- Controllers: Handle the clients' REST API requests and pass them to the Services.
+- Services: Provide a service to the application. Receive input from Controllers, perform validation and business logic, and calling Repositories for data manipulation.
+- Repositories: Responsible to database operations.
+
+The main components of the service are:
+
+- AppUserService: Provides a service to manipulate AppUsers.
+- UserExerciseService: Provides a service to manipulate UserExercises.
+- ExerciseHistoryService: Provides a service to manipulate ExerciseHistory.
+- LoginService: Provides a service to handle the login process.
+- RegisterService: Provides a service to handle the registering process.
 
 ## Installation 
 The project is created with Maven, so you just need to import it to your IDE and build the project to resolve the dependencies.
@@ -39,83 +62,6 @@ spring.datasource.driverClassName=org.h2.Driver
 spring.datasource.username=admin
 spring.datasource.password=admin
 ```
-
-# Overview
-
-## Configs
-Configurations for the application.
-
-### WebSecurityConfig.java
-Configuration for the WebSecurity.
-
-## Models
-Represents an object in the application.
-
-### AppUser.java
-They are the users in the application.
-
-### UserExercise.java
-They are the users' own exercises in the application.
-
-### ExerciseHistory.java
-They are the users' exercise history in the application.
-
-### LoginForm.java
-Represent the LoginForm. Used when the user tries to log in.
-
-### RegisterForm.java
-Represent the RegisterForm. Used when a new user tries to register.
-
-## Controllers
-They are responsible to handle the client REST API requests.
-
-### AppUserController.java
-Handles the client's REST API requests that are related to the user (AppUser).
-
-### UserExerciseController.java
-Handles the client's REST API requests that are related to the user's own exercises (UserExercise).
-
-### ExerciseHistoryController.java
-Handles the client's REST API requests that are related to the user's exercise history (ExerciseHistory).
-
-### LoginController.java
-Handles the client's REST API requests that are related to logging in the user.
-
-### RegisterController.java
-Handles the client's REST API requests that are related to register a new user.
-
-### WebController.java
-Maps the client's REST API requests to a html page.
-
-## Services
-They are responsible to provide a service to the application.
-
-### AppUserService.java
-Provides a service to manipulate AppUsers.
-
-### UserExerciseService.java
-Provides a service to manipulate UserExercises.
-
-### ExerciseHistoryService.java
-Provides a service to manipulate ExerciseHistory.
-
-### LoginService.java
-Provides a service to handle the login process.
-
-### RegisterService.java
-Provides a service to handle the registering process.
-
-## Repositories
-They are responsible for database operations.
-
-### JdbcAppUserRepository.java 
-Responsible for manipulating the AppUsers in the database using JdbcTemplate.
-
-### JdbcUserExerciseRepository.java
-Responsible for manipulating the UserExercises in the database using JdbcTemplate.
-
-### JdbcExerciseHistoryRepository.java
-Responsible for manipulating the ExerciseHistory in the database using JdbcTemplate.
 
 ## Database
 
