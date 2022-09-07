@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
- * Maps the client's REST API requests to a html page.
+ * Maps the client's GET requests to a html page.
  */
 
 @Controller
