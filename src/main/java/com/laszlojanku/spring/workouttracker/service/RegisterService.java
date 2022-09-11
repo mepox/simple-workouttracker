@@ -16,6 +16,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.laszlojanku.spring.workouttracker.SimpleWorkoutTrackerApplication;
+import com.laszlojanku.spring.workouttracker.exception.JdbcException;
 import com.laszlojanku.spring.workouttracker.model.RegisterForm;
 import com.laszlojanku.spring.workouttracker.repository.JdbcAppUserRepository;
 import com.laszlojanku.spring.workouttracker.repository.JdbcExerciseHistoryRepository;
@@ -59,9 +60,10 @@ public class RegisterService {
 	 * Registers a new user using the RegisterForm.
 	 * @param	registerForm	RegisterForm object
 	 * @return					the new user's id
-	 * @throws 					Exception if something went wrong
+	 * @throws Exception
+	 * @throws JdbcException
 	 */
-	public int register(RegisterForm registerForm) throws Exception  {
+	public int register(RegisterForm registerForm) throws Exception, JdbcException  {
 		// Validate username
 		validateUsername(registerForm.getUsername());
 		
@@ -83,7 +85,7 @@ public class RegisterService {
 		try {			
 			userId = appUserRepository.add(registerForm.getUsername(), registerForm.getPassword(), "ROLE_USER");			
 		} catch (DataAccessException e) {
-			throw new Exception("Database error.");
+			throw new JdbcException("Database error.");
 		}
 		
 		// Add default exercises to the new user

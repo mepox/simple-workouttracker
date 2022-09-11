@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.laszlojanku.spring.workouttracker.exception.JdbcException;
 import com.laszlojanku.spring.workouttracker.model.ExerciseHistory;
 import com.laszlojanku.spring.workouttracker.service.AppUserService;
 import com.laszlojanku.spring.workouttracker.service.ExerciseHistoryService;

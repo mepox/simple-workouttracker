@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.laszlojanku.spring.workouttracker.exception.JdbcException;
 import com.laszlojanku.spring.workouttracker.model.AppUser;
 import com.laszlojanku.spring.workouttracker.model.LoginForm;
 import com.laszlojanku.spring.workouttracker.repository.JdbcAppUserRepository;
@@ -29,16 +30,17 @@ public class LoginService {
 	/**
 	 * Log-in the user using the LoginForm.
 	 * @param	loginForm	LoginForm object
-	 * @throws 				Exception if something went wrong
+	 * @throws Exception
+	 * @throws JdbcException
 	 */
-	public void login(LoginForm loginForm) throws Exception {
+	public void login(LoginForm loginForm) throws Exception, JdbcException {
 		AppUser appUser;
 		
 		try {
 			appUser = appUserRepository.get(loginForm.getUsername());
 		}
 		catch (DataAccessException e) {
-			throw new Exception("Database error.");
+			throw new JdbcException("Database error.");
 		}
 		
 		if (appUser == null) {

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.laszlojanku.spring.workouttracker.exception.JdbcException;
 import com.laszlojanku.spring.workouttracker.model.ExerciseHistory;
 import com.laszlojanku.spring.workouttracker.repository.JdbcExerciseHistoryRepository;
 
@@ -26,23 +27,23 @@ public class ExerciseHistoryService {
 	 * @param weight			weight
 	 * @param reps				reps
 	 * @param exercise_date		date
-	 * @throws 					Exception if something went wrong
+	 * @throws JdbcException
 	 */	
-	public void add(int userId, int userExerciseId, int weight, int reps, String exercise_date) throws Exception {
+	public void add(int userId, int userExerciseId, int weight, int reps, String exercise_date) throws JdbcException {
 		
 		try {
 			exerciseHistoryRepository.add(userId, userExerciseId, weight, reps, exercise_date);
 		} catch (DataAccessException e) {
-			throw new Exception("Database error. Couldn't add new exercise to the history.");
+			throw new JdbcException("Database error. Couldn't add new exercise to the history.");
 		}
 	}
 	
 	/**
 	 * Adds a new ExerciseHistory for a user to the database
 	 * @param exerciseHistory	ExerciseHistory object
-	 * @throws 					Exception if something went wrong
+	 * @throws JdbcException
 	 */
-	public void add(ExerciseHistory exerciseHistory) throws Exception {
+	public void add(ExerciseHistory exerciseHistory) throws JdbcException {
 		int userId = exerciseHistory.getUserId();
 		int userExerciseId = exerciseHistory.getUserExerciseId();
 		int weight = exerciseHistory.getWeight();
@@ -57,15 +58,15 @@ public class ExerciseHistoryService {
 	 * @param userId			user's id
 	 * @param exercise_date		date
 	 * @return					list of all the ExerciseHistory on the specific date
-	 * @throws 					Exception if something went wrong
+	 * @throws JdbcException
 	 */	
-	public List<ExerciseHistory> getAll(int userId, String exercise_date) throws Exception {
+	public List<ExerciseHistory> getAll(int userId, String exercise_date) throws JdbcException {
 		List<ExerciseHistory> exerciseHistoryList = new ArrayList<ExerciseHistory>();
 		
 		try {
 			exerciseHistoryList = exerciseHistoryRepository.getAll(userId, exercise_date);
 		} catch (DataAccessException e) {
-			throw new Exception("Database error. Couldn't get the exercises from the history.");
+			throw new JdbcException("Database error. Couldn't get the exercises from the history.");
 		}
 		
 		return exerciseHistoryList;
@@ -74,15 +75,16 @@ public class ExerciseHistoryService {
 	/**
 	 * Deletes an ExerciseHistory using the id from the database. 
 	 * @param id	ExerciseHistory's id
-	 * @throws		Exception if something went wrong 
+	 * @throws Exception 
+	 * @throws JdbcException
 	 */
-	public void delete(int id) throws Exception {
+	public void delete(int id) throws Exception, JdbcException {
 		boolean isDeleted = false;
 		
 		try {
 			isDeleted = exerciseHistoryRepository.delete(id);
 		} catch (DataAccessException e) {
-			throw new Exception("Database error. Couldn't delete the exercise from the history.");
+			throw new JdbcException("Database error. Couldn't delete the exercise from the history.");
 		}
 		
 		if (!isDeleted) {
