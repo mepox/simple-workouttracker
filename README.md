@@ -1,6 +1,6 @@
-# A simple Workout Tracker
+# Workout Tracker app
 
-A simple Workout Tracker made with Spring Boot. 
+Workout Tracker app made with Spring Boot.
 
 ![Alt text](screenshot1.jpg?raw=true "Workout Tracker")
 ![Alt text](screenshot2.jpg?raw=true "Workout Tracker")
