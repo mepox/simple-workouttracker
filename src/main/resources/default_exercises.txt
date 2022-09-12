@@ -1,5 +1,7 @@
 Flat Barbell Bench Press
+Flat Dumbbell Bench Press
 Incline Barbell Bench Press
+Incline Dumbbell Bench Press
 Lat Pulldown
 Seated Cable Row
 Barbell Squat
