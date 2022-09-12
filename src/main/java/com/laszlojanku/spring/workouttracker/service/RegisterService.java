@@ -20,6 +20,9 @@ import com.laszlojanku.spring.workouttracker.model.RegisterForm;
 import com.laszlojanku.spring.workouttracker.repository.JdbcAppUserRepository;
 import com.laszlojanku.spring.workouttracker.repository.JdbcExerciseHistoryRepository;
 import com.laszlojanku.spring.workouttracker.repository.JdbcUserExerciseRepository;
+import com.laszlojanku.spring.workouttracker.validator.PasswordValidator;
+import com.laszlojanku.spring.workouttracker.validator.UsernameValidator;
+import com.laszlojanku.spring.workouttracker.validator.ValidatorResponse;
 
 /**
  * Provides a service to handle the registering process.
@@ -35,6 +38,12 @@ public class RegisterService {
 	
 	@Autowired
 	private JdbcExerciseHistoryRepository exerciseHistoryRepository;
+	
+	@Autowired
+	private UsernameValidator usernameValidator;
+	
+	@Autowired
+	private PasswordValidator passwordValidator;
 	
 	@EventListener(ApplicationReadyEvent.class)
 	private void addDefaultUserAfterStartup() {
@@ -64,10 +73,19 @@ public class RegisterService {
 	 */
 	public int register(RegisterForm registerForm) throws AppException, JdbcException  {
 		// Validate username
-		validateUsername(registerForm.getUsername());
+		ValidatorResponse validatorResponse = usernameValidator.validate(registerForm.getUsername());
+		
+		if (!validatorResponse.isValid()) {
+			throw new AppException(validatorResponse.getMessage());						
+		}
 		
 		// Validate password
-		validatePassword(registerForm.getPassword());
+		validatorResponse = passwordValidator.validate(registerForm.getPassword());
+		
+		if (!validatorResponse.isValid()) {
+			throw new AppException(validatorResponse.getMessage());
+		}
+		
 		
 		// Check if user already exists
 		if (appUserRepository.isExists(registerForm.getUsername())) {
@@ -95,18 +113,6 @@ public class RegisterService {
 		}		
 		
 		return userId;
-	}
-	
-	private void validateUsername(String username) throws AppException  {
-		boolean result = username.matches("[a-zA-Z]+");
-		
-		if (!result) {
-			throw new AppException("Username can only contain alphabets characters.");						
-		}
-	}
-	
-	private void validatePassword(String password) {
-		// todo				
 	}
 	
 	private void addDefaultExercisesToNewAppUser(int userId) throws IOException {

@@ -11,6 +11,8 @@ import com.laszlojanku.spring.workouttracker.exception.JdbcException;
 import com.laszlojanku.spring.workouttracker.model.UserExercise;
 import com.laszlojanku.spring.workouttracker.repository.JdbcExerciseHistoryRepository;
 import com.laszlojanku.spring.workouttracker.repository.JdbcUserExerciseRepository;
+import com.laszlojanku.spring.workouttracker.validator.ExerciseNameValidator;
+import com.laszlojanku.spring.workouttracker.validator.ValidatorResponse;
 
 /**
  * Provides a service to manipulate UserExercise in the database.
@@ -24,6 +26,9 @@ public class UserExerciseService {
 	@Autowired
 	private JdbcExerciseHistoryRepository exerciseHistoryRepository;
 	
+	@Autowired 
+	private ExerciseNameValidator exerciseNameValidator;
+	
 	/**
 	 * Adds a new UserExercise to a user to the database.
 	 * @param newExerciseName	new exercise's name
@@ -32,9 +37,11 @@ public class UserExerciseService {
 	 * @throws JdbcException
 	 */
 	public void add(String newExerciseName, int userId) throws AppException, JdbcException {
-		// Validate new exercise name, it can be only text
-		if (!newExerciseName.matches("^[ A-Za-z]+$")) {
-			throw new AppException("Exercise name can only contain Alphabets and Space.");
+		// Validate new exercise name
+		ValidatorResponse validatorResponse = exerciseNameValidator.validate(newExerciseName);
+		
+		if (!validatorResponse.isValid()) {
+			throw new AppException(validatorResponse.getMessage());
 		}
 		
 		// Check if already exists
