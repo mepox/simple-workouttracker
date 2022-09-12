@@ -1,17 +1,13 @@
 package com.laszlojanku.spring.workouttracker.service;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
-import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -30,15 +26,13 @@ import com.laszlojanku.spring.workouttracker.repository.JdbcUserExerciseReposito
 public class RegisterService {
 	
 	private JdbcAppUserRepository appUserRepository;
-	private JdbcUserExerciseRepository exerciseRepository;
-	private ResourceLoader resourceLoader;
+	private JdbcUserExerciseRepository exerciseRepository;	
 	
 	@Autowired
 	public RegisterService(JdbcAppUserRepository appUserRepository, JdbcUserExerciseRepository exerciseRepository, 
-			JdbcExerciseHistoryRepository exerciseHistoryRepository, ResourceLoader resourceLoader) {
+			JdbcExerciseHistoryRepository exerciseHistoryRepository) {
 		this.appUserRepository = appUserRepository;		
-		this.exerciseRepository = exerciseRepository;
-		this.resourceLoader = resourceLoader;
+		this.exerciseRepository = exerciseRepository;		
 		
 		// Add a default user
 		try {
