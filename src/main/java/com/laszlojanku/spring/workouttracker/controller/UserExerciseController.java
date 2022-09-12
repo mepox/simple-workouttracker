@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.laszlojanku.spring.workouttracker.exception.AppException;
+import com.laszlojanku.spring.workouttracker.exception.JdbcException;
 import com.laszlojanku.spring.workouttracker.model.UserExercise;
 import com.laszlojanku.spring.workouttracker.service.AppUserService;
 import com.laszlojanku.spring.workouttracker.service.UserExerciseService;
@@ -48,7 +50,7 @@ public class UserExerciseController {
 		try {
 			int userId = appUserService.getId(auth.getName());
 			userExercises = userExerciseService.getAll(userId);
-		} catch (Exception e ) {
+		} catch (AppException | JdbcException e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		
@@ -70,7 +72,7 @@ public class UserExerciseController {
 		try {
 			int userId = appUserService.getId(auth.getName());
 			userExerciseService.add(newExerciseName, userId);
-		} catch (Exception e) {
+		} catch (AppException | JdbcException e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		
@@ -86,7 +88,7 @@ public class UserExerciseController {
 	public ResponseEntity<String> delete(@PathVariable("id") int id) {
 		try {
 			userExerciseService.delete(id);
-		} catch (Exception e) {
+		} catch (AppException | JdbcException e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		

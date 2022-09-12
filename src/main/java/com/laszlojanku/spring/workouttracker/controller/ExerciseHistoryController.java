@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.laszlojanku.spring.workouttracker.exception.AppException;
 import com.laszlojanku.spring.workouttracker.exception.JdbcException;
 import com.laszlojanku.spring.workouttracker.model.ExerciseHistory;
 import com.laszlojanku.spring.workouttracker.service.AppUserService;
@@ -51,7 +52,7 @@ public class ExerciseHistoryController {
 			int userId = appUserService.getId(auth.getName());
 			exerciseHistoryList = exerciseHistoryService.getAll(userId, strDate);		
 			
-		} catch (Exception e) {
+		} catch (AppException | JdbcException e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		
@@ -74,7 +75,7 @@ public class ExerciseHistoryController {
 			// Get and apply the userId
 			exerciseHistory.setUserId(appUserService.getId(auth.getName()));
 			exerciseHistoryService.add(exerciseHistory);
-		} catch (Exception e) {
+		} catch (AppException | JdbcException e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		
@@ -90,7 +91,7 @@ public class ExerciseHistoryController {
 	public ResponseEntity<String> delete(@PathVariable("id") int id) {
 		try {			
 			exerciseHistoryService.delete(id);
-		} catch (Exception e) {
+		} catch (AppException | JdbcException e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		

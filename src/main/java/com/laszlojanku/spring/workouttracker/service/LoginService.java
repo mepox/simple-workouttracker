@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.laszlojanku.spring.workouttracker.exception.AppException;
 import com.laszlojanku.spring.workouttracker.exception.JdbcException;
 import com.laszlojanku.spring.workouttracker.model.AppUser;
 import com.laszlojanku.spring.workouttracker.model.LoginForm;
@@ -30,10 +31,10 @@ public class LoginService {
 	/**
 	 * Log-in the user using the LoginForm.
 	 * @param	loginForm	LoginForm object
-	 * @throws Exception
+	 * @throws AppException
 	 * @throws JdbcException
 	 */
-	public void login(LoginForm loginForm) throws Exception, JdbcException {
+	public void login(LoginForm loginForm) throws AppException, JdbcException {
 		AppUser appUser;
 		
 		try {
@@ -44,11 +45,11 @@ public class LoginService {
 		}
 		
 		if (appUser == null) {
-			throw new Exception("Username not found.");
+			throw new AppException("Username not found.");
 		}
 		
 		if (!appUser.getPassword().equals(loginForm.getPassword())) {	
-			throw new Exception("Incorrect password.");			
+			throw new AppException("Incorrect password.");			
 		}
 		
 		// Username and password are correct, so now login the user

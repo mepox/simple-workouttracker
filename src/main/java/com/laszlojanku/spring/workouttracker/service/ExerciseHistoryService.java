@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.laszlojanku.spring.workouttracker.exception.AppException;
 import com.laszlojanku.spring.workouttracker.exception.JdbcException;
 import com.laszlojanku.spring.workouttracker.model.ExerciseHistory;
 import com.laszlojanku.spring.workouttracker.repository.JdbcExerciseHistoryRepository;
@@ -75,10 +76,10 @@ public class ExerciseHistoryService {
 	/**
 	 * Deletes an ExerciseHistory using the id from the database. 
 	 * @param id	ExerciseHistory's id
-	 * @throws Exception 
+	 * @throws AppException 
 	 * @throws JdbcException
 	 */
-	public void delete(int id) throws Exception, JdbcException {
+	public void delete(int id) throws AppException, JdbcException {
 		boolean isDeleted = false;
 		
 		try {
@@ -88,7 +89,7 @@ public class ExerciseHistoryService {
 		}
 		
 		if (!isDeleted) {
-			throw new Exception("Exercise not found in the history.");
+			throw new AppException("Exercise not found in the history.");
 		}
 	}
 

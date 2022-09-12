@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.laszlojanku.spring.workouttracker.SimpleWorkoutTrackerApplication;
+import com.laszlojanku.spring.workouttracker.exception.AppException;
+import com.laszlojanku.spring.workouttracker.exception.JdbcException;
 import com.laszlojanku.spring.workouttracker.model.RegisterForm;
 import com.laszlojanku.spring.workouttracker.service.RegisterService;
 
@@ -31,7 +33,7 @@ public class RegisterController {
 		
 		try {
 			registerService.register(registerForm);
-		} catch (Exception e) {
+		} catch (AppException | JdbcException e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		

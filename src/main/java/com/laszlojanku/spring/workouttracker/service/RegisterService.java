@@ -16,6 +16,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.laszlojanku.spring.workouttracker.SimpleWorkoutTrackerApplication;
+import com.laszlojanku.spring.workouttracker.exception.AppException;
 import com.laszlojanku.spring.workouttracker.exception.JdbcException;
 import com.laszlojanku.spring.workouttracker.model.RegisterForm;
 import com.laszlojanku.spring.workouttracker.repository.JdbcAppUserRepository;
@@ -60,10 +61,10 @@ public class RegisterService {
 	 * Registers a new user using the RegisterForm.
 	 * @param	registerForm	RegisterForm object
 	 * @return					the new user's id
-	 * @throws Exception
+	 * @throws AppException
 	 * @throws JdbcException
 	 */
-	public int register(RegisterForm registerForm) throws Exception, JdbcException  {
+	public int register(RegisterForm registerForm) throws AppException, JdbcException  {
 		// Validate username
 		validateUsername(registerForm.getUsername());
 		
@@ -72,12 +73,12 @@ public class RegisterService {
 		
 		// Check if user already exists
 		if (appUserRepository.isExists(registerForm.getUsername())) {
-			throw new Exception("Username already exists.");
+			throw new AppException("Username already exists.");
 		}
 		
 		// Check if password and passwordConfirm matches 
 		if (!registerForm.getPassword().equals(registerForm.getPasswordConfirm())) {
-			throw new Exception("Password confirmation doesnt match.");
+			throw new AppException("Password confirmation doesnt match.");
 		}
 		
 		// Add the new user
@@ -92,17 +93,17 @@ public class RegisterService {
 		try {
 			addDefaultExercisesToNewAppUser(userId);
 		} catch (IOException e) {
-			throw new Exception("Error while trying to add the default exercises for the new user.");
+			throw new AppException("Error while trying to add the default exercises for the new user.");
 		}		
 		
 		return userId;
 	}
 	
-	private void validateUsername(String username) throws Exception  {
+	private void validateUsername(String username) throws AppException  {
 		boolean result = username.matches("[a-zA-Z]+");
 		
 		if (!result) {
-			throw new Exception("Username can only contain alphabets characters.");						
+			throw new AppException("Username can only contain alphabets characters.");						
 		}
 	}
 	

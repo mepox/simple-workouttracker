@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.laszlojanku.spring.workouttracker.exception.AppException;
 import com.laszlojanku.spring.workouttracker.exception.JdbcException;
 import com.laszlojanku.spring.workouttracker.model.AppUser;
 import com.laszlojanku.spring.workouttracker.repository.JdbcAppUserRepository;
@@ -21,10 +22,10 @@ public class AppUserService {
 	 * Gets an AppUser's id by username from the database.
 	 * @param	username	username
 	 * @return				AppUser's id
-	 * @throws Exception
+	 * @throws AppException
 	 * @throws JdbcException
 	 */
-	public int getId(String username) throws Exception, JdbcException {
+	public int getId(String username) throws AppException, JdbcException {
 		AppUser appUser = null;
 		
 		try {
@@ -34,7 +35,7 @@ public class AppUserService {
 		}
 		
 		if (appUser == null) {
-			throw new Exception("Username not found.");
+			throw new AppException("Username not found.");
 		}
 		
 		return appUser.getId();
