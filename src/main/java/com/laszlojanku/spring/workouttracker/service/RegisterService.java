@@ -7,6 +7,8 @@ import java.io.InputStreamReader;
 import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -25,15 +27,17 @@ import com.laszlojanku.spring.workouttracker.repository.JdbcUserExerciseReposito
 @Service
 public class RegisterService {
 	
+	@Autowired
 	private JdbcAppUserRepository appUserRepository;
-	private JdbcUserExerciseRepository exerciseRepository;	
 	
 	@Autowired
-	public RegisterService(JdbcAppUserRepository appUserRepository, JdbcUserExerciseRepository exerciseRepository, 
-			JdbcExerciseHistoryRepository exerciseHistoryRepository) {
-		this.appUserRepository = appUserRepository;		
-		this.exerciseRepository = exerciseRepository;		
-		
+	private JdbcUserExerciseRepository exerciseRepository;
+	
+	@Autowired
+	private JdbcExerciseHistoryRepository exerciseHistoryRepository;
+	
+	@EventListener(ApplicationReadyEvent.class)
+	private void addDefaultUserAfterStartup() {
 		// Add a default user
 		try {
 			// Adds a default user with the default exercises
@@ -48,7 +52,7 @@ public class RegisterService {
 			exerciseHistoryRepository.add(userId, 2, 60, 10, LocalDate.now().toString());
 		} catch (Exception e) {			
 			SimpleWorkoutTrackerApplication.logger.warn("Error while trying to add the default user(s): " + e.getMessage());			
-		}	
+		}
 	}
 	
 	/**
