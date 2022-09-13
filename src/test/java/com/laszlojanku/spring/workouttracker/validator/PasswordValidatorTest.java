@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -61,6 +62,14 @@ public class PasswordValidatorTest {
 		boolean actual = passwordValidator.validate(password).isValid();
 		
 		assertFalse(actual);
+	}
+	
+	@ParameterizedTest
+	@NullAndEmptySource
+	public void validate_NullOrEmpty_ReturnsFalse(String password) {
+		boolean actual = passwordValidator.validate(password).isValid();
+		
+		assertFalse(actual);			
 	}
 
 }
