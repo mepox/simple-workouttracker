@@ -13,7 +13,7 @@ public class UsernameValidator {
 	private final String INVALID_LENGTH = "Username has to be minimum 4 and maximum 16 characters.";	
 	
 	public ValidatorResponse validate(String username) {
-		if (username.length() < MIN_LENGTH | username.length() > MAX_LENGTH) {
+		if (username.length() < MIN_LENGTH || username.length() > MAX_LENGTH) {
 			return new ValidatorResponse(false, INVALID_LENGTH);
 		}
 		
