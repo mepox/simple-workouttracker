@@ -13,6 +13,10 @@ public class PasswordValidator {
 	private final String INVALID_LENGTH = "Password has to be minimum 4 and maximum 16 characters.";	
 	
 	public ValidatorResponse validate(String password) {
+		if (password == null) {
+			return new ValidatorResponse(false, INVALID_CHARS);
+		}
+		
 		if (password.length() < MIN_LENGTH || password.length() > MAX_LENGTH) {
 			return new ValidatorResponse(false, INVALID_LENGTH);
 		}

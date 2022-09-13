@@ -13,6 +13,10 @@ public class ExerciseNameValidator {
 	private final String INVALID_LENGTH = "Exercise name has to be minimum 4 and maximum 32 characters.";	
 	
 	public ValidatorResponse validate(String exerciseName) {
+		if (exerciseName == null) {
+			return new ValidatorResponse(false, INVALID_CHARS);
+		}
+		
 		if (exerciseName.length() < MIN_LENGTH || exerciseName.length() > MAX_LENGTH) {
 			return new ValidatorResponse(false, INVALID_LENGTH);
 		}
