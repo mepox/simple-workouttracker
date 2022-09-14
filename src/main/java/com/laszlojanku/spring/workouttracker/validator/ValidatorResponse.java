@@ -1,5 +1,8 @@
 package com.laszlojanku.spring.workouttracker.validator;
 
+/**
+ * Holds the validators' responses which contains a message and a boolean.
+ */
 public class ValidatorResponse {
 	
 	private boolean valid;

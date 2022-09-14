@@ -2,6 +2,10 @@ package com.laszlojanku.spring.workouttracker.validator;
 
 import org.springframework.stereotype.Service;
 
+/**
+ * Validates a username.
+ * Username can only contain alphabet characters. It has to be minimum 4 and maximum 16 characters.
+ */
 @Service
 public class UsernameValidator {
 	

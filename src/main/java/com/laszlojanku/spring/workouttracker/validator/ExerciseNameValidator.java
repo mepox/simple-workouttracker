@@ -2,6 +2,10 @@ package com.laszlojanku.spring.workouttracker.validator;
 
 import org.springframework.stereotype.Service;
 
+/**
+ * Validates an exercise name.
+ * Exercise name can only contain alphabet characters and spaces. It has to be minimum 4 and maximum 32 characters.
+ */
 @Service
 public class ExerciseNameValidator {
 	
