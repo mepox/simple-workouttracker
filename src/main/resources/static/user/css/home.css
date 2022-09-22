@@ -14,6 +14,18 @@ table {
 	margin-right: auto;
 }
 
+@media (max-width: 1344px){
+  #trackerBox {
+    width: 50%;
+  }
+}
+
+@media (max-width: 768px){
+  #trackerBox {
+    width: 95%;
+  }
+}
+
 .redButton {
 	background-color: red;
 	color: white;
