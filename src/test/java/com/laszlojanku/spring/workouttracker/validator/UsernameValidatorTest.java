@@ -81,5 +81,14 @@ public class UsernameValidatorTest {
 		
 		assertFalse(actual);		
 	}
+	
+	@Test
+	public void validate_ContainsCapitalLetters_ReturnsTrue() {
+		String username = "UserUser";
+		
+		boolean actual = usernameValidator.validate(username).isValid();
+		
+		assertTrue(actual);
+	}
 
 }

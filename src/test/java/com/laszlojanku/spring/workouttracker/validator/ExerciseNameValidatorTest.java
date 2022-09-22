@@ -1,6 +1,7 @@
 package com.laszlojanku.spring.workouttracker.validator;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -61,5 +62,30 @@ public class ExerciseNameValidatorTest {
 		boolean actual = exerciseNameValidator.validate(name).isValid();
 		
 		assertFalse(actual);
+	}
+	
+	@Test
+	public void validate_ContainsSpace_ReturnTrue() {
+		String name = "exercise exercise exercise";
+		
+		boolean actual = exerciseNameValidator.validate(name).isValid();
+		
+		assertTrue(actual);
+	}
+	
+	@Test
+	public void validate_ContainsSpaceAndNumbers_ReturnFalse() {
+		String name = "exercise1 exercise2 exercise3";
+		
+		boolean actual = exerciseNameValidator.validate(name).isValid();
+		
+		assertFalse(actual);
+	}
+	
+	@Test
+	public void validate_ContainsCapitalLetters_ReturnTrue() {
+		String name = "Exercise Exercise Exercise";
+		
+		boolean actual = exerciseNameValidator.validate(name).isValid();
 	}
 }

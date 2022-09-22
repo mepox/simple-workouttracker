@@ -71,5 +71,14 @@ public class PasswordValidatorTest {
 		
 		assertFalse(actual);			
 	}
+	
+	@Test
+	public void validate_ContainsCapitalLetters_ReturnTrue() {
+		String password = "PassWord123";
+		
+		boolean actual = passwordValidator.validate(password).isValid();
+		
+		assertTrue(actual);
+	}
 
 }
