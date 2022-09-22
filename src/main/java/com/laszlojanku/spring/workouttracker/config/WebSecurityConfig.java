@@ -32,6 +32,7 @@ public class WebSecurityConfig {
 		http.authorizeRequests().antMatchers("/login/perform_login").permitAll();
 		http.authorizeRequests().antMatchers("/logout").permitAll();
 		http.authorizeRequests().antMatchers("/register").permitAll();
+		http.authorizeRequests().antMatchers("/version").permitAll();
 		http.authorizeRequests().antMatchers("/public/**").permitAll();		
 		
 		// Access denied for Admin's page 

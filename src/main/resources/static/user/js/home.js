@@ -2,7 +2,8 @@ function onStart() {
 	showWelcomeMessage();
 	showStatus("Ready.");
 	resetCalendar();
-	showWorkoutLog();	
+	showWorkoutLog();
+	updateVersion();	
 }
 
 function showWelcomeMessage() {

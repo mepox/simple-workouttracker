@@ -1,5 +1,6 @@
 function onStart() {
 	clearLoginForm();
+	updateVersion();
 }
 
 function loginUser() {

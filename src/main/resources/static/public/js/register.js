@@ -1,5 +1,6 @@
 function onStart() {
 	console.log("Page loaded.");
+	updateVersion();
 }
 
 function registerUser() {
