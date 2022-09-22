@@ -27,7 +27,7 @@ public class ExerciseNameValidatorTest {
 	@ParameterizedTest
 	@MethodSource("com.laszlojanku.spring.workouttracker.validator.SpecialCharsProvider#getSpecials")
 	public void validate_ContainsSpecialChars_ReturnFalse(String specialChar) {
-		// Append the word "user" to the beginning
+		// Append the word "exercise" to the beginning
 		String name = "exercise" + specialChar;
 		
 		boolean actual = exerciseNameValidator.validate(name).isValid();
