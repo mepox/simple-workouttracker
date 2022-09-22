@@ -1,5 +1,8 @@
 package com.laszlojanku.spring.workouttracker.validator;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.springframework.stereotype.Service;
 
 /**
@@ -10,11 +13,17 @@ import org.springframework.stereotype.Service;
 public class UsernameValidator {
 	
 	private final String REGEX = "[a-zA-Z]+";
+	private final Pattern pattern;
+	private Matcher matcher;
 	private final int MIN_LENGTH = 4;
 	private final int MAX_LENGTH = 16;
 	
 	private final String INVALID_CHARS = "Username can only contain alphabet characters.";
-	private final String INVALID_LENGTH = "Username has to be minimum 4 and maximum 16 characters.";	
+	private final String INVALID_LENGTH = "Username has to be minimum 4 and maximum 16 characters.";
+	
+	public UsernameValidator() {
+		pattern = Pattern.compile(REGEX);
+	}
 	
 	public ValidatorResponse validate(String username) {
 		if (username == null) {
@@ -25,7 +34,9 @@ public class UsernameValidator {
 			return new ValidatorResponse(false, INVALID_LENGTH);
 		}
 		
-		if (!username.matches(REGEX)) {
+		matcher = pattern.matcher(username);
+		
+		if (!matcher.matches()) {
 			return new ValidatorResponse(false, INVALID_CHARS);
 		}
 		
