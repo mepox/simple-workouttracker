@@ -17,7 +17,6 @@ import com.laszlojanku.spring.workouttracker.exception.AppException;
 import com.laszlojanku.spring.workouttracker.exception.JdbcException;
 import com.laszlojanku.spring.workouttracker.model.AppUser;
 import com.laszlojanku.spring.workouttracker.model.LoginForm;
-import com.laszlojanku.spring.workouttracker.repository.JdbcAppUserRepository;
 
 /**
  * Provides a service to handle the logging in process.
@@ -26,7 +25,7 @@ import com.laszlojanku.spring.workouttracker.repository.JdbcAppUserRepository;
 public class LoginService {
 	
 	@Autowired
-	private JdbcAppUserRepository appUserRepository;
+	private AppUserService appUserService;
 	
 	/**
 	 * Log-in the user using the LoginForm.
@@ -38,7 +37,7 @@ public class LoginService {
 		AppUser appUser;
 		
 		try {
-			appUser = appUserRepository.get(loginForm.getUsername());
+			appUser = appUserService.getAppUser(loginForm.getUsername());
 		}
 		catch (DataAccessException e) {
 			throw new JdbcException("Database error.");

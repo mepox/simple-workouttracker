@@ -31,7 +31,7 @@ import com.laszlojanku.spring.workouttracker.validator.ValidatorResponse;
 public class RegisterService {
 	
 	@Autowired
-	private JdbcAppUserRepository appUserRepository;
+	private AppUserService appUserService;
 	
 	@Autowired
 	private JdbcUserExerciseRepository exerciseRepository;
@@ -88,7 +88,7 @@ public class RegisterService {
 		
 		
 		// Check if user already exists
-		if (appUserRepository.isExists(registerForm.getUsername())) {
+		if (appUserService.isExists(registerForm.getUsername())) {
 			throw new AppException("Username already exists.");
 		}
 		
@@ -100,7 +100,7 @@ public class RegisterService {
 		// Add the new user
 		int userId = -1;
 		try {			
-			userId = appUserRepository.add(registerForm.getUsername(), registerForm.getPassword(), "ROLE_USER");			
+			userId = appUserService.add(registerForm.getUsername(), registerForm.getPassword(), "ROLE_USER");			
 		} catch (DataAccessException e) {
 			throw new JdbcException("Database error.");
 		}
