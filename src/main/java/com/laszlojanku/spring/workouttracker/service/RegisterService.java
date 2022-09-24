@@ -17,9 +17,6 @@ import com.laszlojanku.spring.workouttracker.SimpleWorkoutTrackerApplication;
 import com.laszlojanku.spring.workouttracker.exception.AppException;
 import com.laszlojanku.spring.workouttracker.exception.JdbcException;
 import com.laszlojanku.spring.workouttracker.model.RegisterForm;
-import com.laszlojanku.spring.workouttracker.repository.JdbcAppUserRepository;
-import com.laszlojanku.spring.workouttracker.repository.JdbcExerciseHistoryRepository;
-import com.laszlojanku.spring.workouttracker.repository.JdbcUserExerciseRepository;
 import com.laszlojanku.spring.workouttracker.validator.PasswordValidator;
 import com.laszlojanku.spring.workouttracker.validator.UsernameValidator;
 import com.laszlojanku.spring.workouttracker.validator.ValidatorResponse;
@@ -34,10 +31,10 @@ public class RegisterService {
 	private AppUserService appUserService;
 	
 	@Autowired
-	private JdbcUserExerciseRepository exerciseRepository;
+	private UserExerciseService userExerciseService;
 	
 	@Autowired
-	private JdbcExerciseHistoryRepository exerciseHistoryRepository;
+	private ExerciseHistoryService exerciseHistoryService;
 	
 	@Autowired
 	private UsernameValidator usernameValidator;
@@ -52,13 +49,13 @@ public class RegisterService {
 			// Adds a default user with the default exercises
 			int userId = register(new RegisterForm("user", "user", "user"));
 			// Adds few exercise for "today"
-			exerciseHistoryRepository.add(userId, 1, 100, 12, LocalDate.now().toString());
-			exerciseHistoryRepository.add(userId, 1, 100, 11, LocalDate.now().toString());
-			exerciseHistoryRepository.add(userId, 1, 100, 10, LocalDate.now().toString());
+			exerciseHistoryService.add(userId, 1, 100, 12, LocalDate.now().toString());
+			exerciseHistoryService.add(userId, 1, 100, 11, LocalDate.now().toString());
+			exerciseHistoryService.add(userId, 1, 100, 10, LocalDate.now().toString());
 			
-			exerciseHistoryRepository.add(userId, 2, 60, 12, LocalDate.now().toString());
-			exerciseHistoryRepository.add(userId, 2, 60, 11, LocalDate.now().toString());
-			exerciseHistoryRepository.add(userId, 2, 60, 10, LocalDate.now().toString());
+			exerciseHistoryService.add(userId, 2, 60, 12, LocalDate.now().toString());
+			exerciseHistoryService.add(userId, 2, 60, 11, LocalDate.now().toString());
+			exerciseHistoryService.add(userId, 2, 60, 10, LocalDate.now().toString());
 		} catch (Exception e) {			
 			SimpleWorkoutTrackerApplication.logger.warn("Error while trying to add the default user(s): " + e.getMessage());			
 		}
@@ -115,16 +112,15 @@ public class RegisterService {
 		return userId;
 	}
 	
-	private void addDefaultExercisesToNewAppUser(int userId) throws IOException {
+	private void addDefaultExercisesToNewAppUser(int userId) throws IOException, JdbcException, AppException {
 		InputStream inputStream;
-		BufferedReader reader;
-		
+		BufferedReader reader;		
 		
 		inputStream = new ClassPathResource("default_exercises.txt").getInputStream();
 		reader = new BufferedReader(new InputStreamReader(inputStream));
 		while (reader.ready()) {
 			String exercise = reader.readLine();
-			exerciseRepository.add(exercise, userId);
+			userExerciseService.add(exercise, userId);
 		}
 	}
 
