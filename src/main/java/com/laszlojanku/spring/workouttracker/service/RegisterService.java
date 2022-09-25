@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.laszlojanku.spring.workouttracker.exception.AppException;
@@ -33,7 +34,9 @@ public class RegisterService {
 	private UsernameValidator usernameValidator;
 	
 	@Autowired
-	private PasswordValidator passwordValidator;
+	private PasswordValidator passwordValidator;	
+	
+	private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 	
 	/**
 	 * Registers a new user using the RegisterForm.
@@ -70,8 +73,9 @@ public class RegisterService {
 		
 		// Add the new user
 		int userId = -1;
+		String encryptedPassword = bCryptPasswordEncoder.encode(registerForm.getPassword());		
 		try {			
-			userId = appUserService.add(registerForm.getUsername(), registerForm.getPassword(), "ROLE_USER");			
+			userId = appUserService.add(registerForm.getUsername(), encryptedPassword, "ROLE_USER");			
 		} catch (DataAccessException e) {
 			throw new JdbcException("Database error.");
 		}

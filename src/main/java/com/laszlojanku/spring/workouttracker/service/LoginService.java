@@ -11,6 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.laszlojanku.spring.workouttracker.exception.AppException;
@@ -26,6 +27,8 @@ public class LoginService {
 	
 	@Autowired
 	private AppUserService appUserService;
+	
+	private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 	
 	/**
 	 * Log-in the user using the LoginForm.
@@ -47,7 +50,7 @@ public class LoginService {
 			throw new AppException("Username not found.");
 		}
 		
-		if (!appUser.getPassword().equals(loginForm.getPassword())) {	
+		if (!bCryptPasswordEncoder.matches(loginForm.getPassword(), appUser.getPassword())) {	
 			throw new AppException("Incorrect password.");			
 		}
 		

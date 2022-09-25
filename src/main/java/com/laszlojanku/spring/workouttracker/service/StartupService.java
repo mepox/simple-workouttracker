@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Service;
 
 import com.laszlojanku.spring.workouttracker.SimpleWorkoutTrackerApplication;
 import com.laszlojanku.spring.workouttracker.model.RegisterForm;
@@ -12,6 +13,7 @@ import com.laszlojanku.spring.workouttracker.model.RegisterForm;
 /**
  * Run methods after the application started. 
  */
+@Service
 public class StartupService {
 	
 	@Autowired
@@ -23,6 +25,7 @@ public class StartupService {
 	@EventListener(ApplicationReadyEvent.class)
 	private void addDefaultUserAfterStartup() {
 		// Add a default user
+		SimpleWorkoutTrackerApplication.logger.info("Adding default user");
 		try {
 			// Register the default user
 			int userId = registerService.register(new RegisterForm("user", "user", "user"));
