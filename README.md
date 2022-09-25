@@ -71,7 +71,7 @@ spring.datasource.password=admin
 CREATE TABLE appuser (
 	id INT NOT NULL AUTO_INCREMENT,
 	username VARCHAR(16) NOT NULL,
-	password VARCHAR(16) NOT NULL,
+	password VARCHAR(72) NOT NULL,
 	rolename VARCHAR(16) NOT NULL,
 	PRIMARY KEY (id)
 );
