@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.laszlojanku.spring.workouttracker.exception.AppException;
 import com.laszlojanku.spring.workouttracker.exception.JdbcException;
 import com.laszlojanku.spring.workouttracker.model.UserExercise;
-import com.laszlojanku.spring.workouttracker.repository.JdbcExerciseHistoryRepository;
 import com.laszlojanku.spring.workouttracker.repository.JdbcUserExerciseRepository;
 import com.laszlojanku.spring.workouttracker.validator.ExerciseNameValidator;
 import com.laszlojanku.spring.workouttracker.validator.ValidatorResponse;
@@ -24,7 +23,7 @@ public class UserExerciseService {
 	private JdbcUserExerciseRepository userExerciseRepository;
 	
 	@Autowired
-	private JdbcExerciseHistoryRepository exerciseHistoryRepository;
+	private ExerciseHistoryService exerciseHistoryService;
 	
 	@Autowired 
 	private ExerciseNameValidator exerciseNameValidator;
@@ -83,7 +82,7 @@ public class UserExerciseService {
 	public void delete(int id) throws JdbcException, AppException {
 		// First we need to delete the exercise from history (foreign key)
 		try {
-			exerciseHistoryRepository.deleteByExerciseId(id);
+			exerciseHistoryService.delete(id);
 		} catch (DataAccessException e) {
 			throw new JdbcException("Database error.");
 		}

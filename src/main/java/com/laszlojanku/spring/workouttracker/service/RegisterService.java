@@ -4,16 +4,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.laszlojanku.spring.workouttracker.SimpleWorkoutTrackerApplication;
 import com.laszlojanku.spring.workouttracker.exception.AppException;
 import com.laszlojanku.spring.workouttracker.exception.JdbcException;
 import com.laszlojanku.spring.workouttracker.model.RegisterForm;
@@ -34,32 +30,10 @@ public class RegisterService {
 	private UserExerciseService userExerciseService;
 	
 	@Autowired
-	private ExerciseHistoryService exerciseHistoryService;
-	
-	@Autowired
 	private UsernameValidator usernameValidator;
 	
 	@Autowired
 	private PasswordValidator passwordValidator;
-	
-	@EventListener(ApplicationReadyEvent.class)
-	private void addDefaultUserAfterStartup() {
-		// Add a default user
-		try {
-			// Adds a default user with the default exercises
-			int userId = register(new RegisterForm("user", "user", "user"));
-			// Adds few exercise for "today"
-			exerciseHistoryService.add(userId, 1, 100, 12, LocalDate.now().toString());
-			exerciseHistoryService.add(userId, 1, 100, 11, LocalDate.now().toString());
-			exerciseHistoryService.add(userId, 1, 100, 10, LocalDate.now().toString());
-			
-			exerciseHistoryService.add(userId, 2, 60, 12, LocalDate.now().toString());
-			exerciseHistoryService.add(userId, 2, 60, 11, LocalDate.now().toString());
-			exerciseHistoryService.add(userId, 2, 60, 10, LocalDate.now().toString());
-		} catch (Exception e) {			
-			SimpleWorkoutTrackerApplication.logger.warn("Error while trying to add the default user(s): " + e.getMessage());			
-		}
-	}
 	
 	/**
 	 * Registers a new user using the RegisterForm.
