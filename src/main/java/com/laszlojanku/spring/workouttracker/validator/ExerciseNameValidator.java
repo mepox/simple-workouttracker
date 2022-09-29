@@ -7,7 +7,8 @@ import org.springframework.stereotype.Service;
 
 /**
  * Validates an exercise name.
- * Exercise name can only contain alphabet characters and spaces. It has to be minimum 4 and maximum 32 characters.
+ * Exercise name can only contain alphabet characters and spaces. 
+ * It has to be minimum 4 (inclusive) and maximum 32 (inclusive) characters.
  */
 @Service
 public class ExerciseNameValidator {

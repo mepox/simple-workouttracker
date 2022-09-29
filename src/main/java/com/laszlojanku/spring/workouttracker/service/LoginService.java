@@ -32,9 +32,10 @@ public class LoginService {
 	
 	/**
 	 * Log-in the user using the LoginForm.
+	 * 
 	 * @param	loginForm	LoginForm object
-	 * @throws AppException
-	 * @throws JdbcException
+	 * @throws 				AppException
+	 * @throws 				JdbcException
 	 */
 	public void login(LoginForm loginForm) throws AppException, JdbcException {
 		AppUser appUser;

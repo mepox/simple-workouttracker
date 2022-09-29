@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AppUserController {
 	
 	/**
-	 * Handles the client GET requests to retrieve the current user's name.
+	 * Handles the client's GET requests to retrieve the current user's name.
 	 * @param	auth	Authentication token received from the client
 	 * @return			user's name or an error message		
 	 */	

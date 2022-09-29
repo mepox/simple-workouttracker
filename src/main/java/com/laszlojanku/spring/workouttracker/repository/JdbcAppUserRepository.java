@@ -20,6 +20,7 @@ public class JdbcAppUserRepository implements AppUserRepository {
 	
 	/**
 	 * Adds a new AppUser to the database.
+	 * 
 	 * @param	username	the new AppUser's name
 	 * @param	password	the new AppUser's password
 	 * @param	rolename	the new AppUser's rolename eg.: ROLE_USER or ROLE_ADMIN
@@ -37,8 +38,9 @@ public class JdbcAppUserRepository implements AppUserRepository {
 	
 	/**
 	 * Gets an AppUser by username from the database.
-	 * @param	the username
-	 * @return	an AppUser
+	 * 
+	 * @param	username	the username
+	 * @return				an AppUser
 	 * @throws				DataAccessException on database error
 	 */
 	@Override
@@ -66,6 +68,7 @@ public class JdbcAppUserRepository implements AppUserRepository {
 	
 	/**
 	 * Checks if a username exists in the database.
+	 * 
 	 * @param	username	the username to check
 	 * @return				true if exists otherwise false
 	 * @throws				DataAccessException on database error
@@ -81,6 +84,7 @@ public class JdbcAppUserRepository implements AppUserRepository {
 	
 	/**
 	 * Updates an AppUser.
+	 * 
 	 * @param	appUser	an AppUser object with the new details
 	 * @return			true if successful
 	 * @throws			DataAccessException on database error
@@ -94,6 +98,7 @@ public class JdbcAppUserRepository implements AppUserRepository {
 	
 	/**
 	 * Deletes an AppUser by username
+	 * 
 	 * @param	username	the username
 	 * @return				true if successful
 	 * @throws				DataAccessException on database error

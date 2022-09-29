@@ -23,7 +23,8 @@ public class RegisterController {
 	private RegisterService registerService;
 	
 	/**
-	 * Handles the client POST request to register.
+	 * Handles the client's POST request to register.
+	 * 
 	 * @param	registerForm	RegisterForm object sent by the client
 	 * @return					status message and HttpStatus
 	 */

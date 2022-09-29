@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 /**
  * Maps the client's GET requests to a html page.
  */
-
 @Controller
 public class WebController {
 	

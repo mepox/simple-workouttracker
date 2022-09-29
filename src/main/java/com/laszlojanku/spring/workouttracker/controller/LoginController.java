@@ -23,7 +23,8 @@ public class LoginController {
 	private LoginService loginService;
 	
 	/**
-	 * Handles the client POST request to login.
+	 * Handles the client's POST request to login.
+	 * 
 	 * @param	loginForm	LoginForm object sent by the client
 	 * @return				status message and HttpStatus
 	 */	

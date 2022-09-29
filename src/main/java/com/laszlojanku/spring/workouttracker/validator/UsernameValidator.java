@@ -7,7 +7,8 @@ import org.springframework.stereotype.Service;
 
 /**
  * Validates a username.
- * Username can only contain alphabet characters. It has to be minimum 4 and maximum 16 characters.
+ * Username can only contain alphabet characters. 
+ * It has to be minimum 4 (inclusive) and maximum 16 (inclusive) characters.
  */
 @Service
 public class UsernameValidator {

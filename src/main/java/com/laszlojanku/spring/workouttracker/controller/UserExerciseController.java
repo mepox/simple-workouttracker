@@ -35,7 +35,8 @@ public class UserExerciseController {
 	private UserExerciseService userExerciseService;
 	
 	/**
-	 * Handles the client GET request to retrieve all the UserExercises.
+	 * Handles the client's GET request to retrieve all the UserExercises.
+	 * 
 	 * @param	auth	Authentication token sent by the client
 	 * @return			List of all UserExercise in JSON String and HttpStatus
 	 */
@@ -58,7 +59,8 @@ public class UserExerciseController {
 	}
 	
 	/**
-	 * Handles the client POST request to add a new exercise.
+	 * Handles the client's POST request to add a new exercise.
+	 * 
 	 * @param	newExerciseName	the new exercise's name
 	 * @param	auth			Authentication token sent by the client
 	 * @return					status message and HttpStatus
@@ -80,7 +82,8 @@ public class UserExerciseController {
 	}
 	
 	/**
-	 * Handles the client DELETE request the delete a UserExercise
+	 * Handles the client's DELETE request the delete a UserExercise.
+	 * 
 	 * @param	id	the id of the UserExercise
 	 * @return		status message and HttpStatus
 	 */

@@ -35,8 +35,9 @@ public class ExerciseHistoryController {
 	private ExerciseHistoryService exerciseHistoryService;
 	
 	/**
-	 * Handles the client GET request to retrieve all the ExerciseHistory from a specific date 
-	 * @param	strDate	the requested date as a String in yyyy-MM-dd format
+	 * Handles the client's GET request to retrieve all the ExerciseHistory from a specific date
+	 *  
+	 * @param	strDate	the requested date as a String in yyyy-mm-dd format
 	 * @param	auth	Authentication token received from the client
 	 * @return			List of all ExerciseHistory on the specific date in a JSON String format and a HttpStatus
 	 */	
@@ -60,7 +61,8 @@ public class ExerciseHistoryController {
 	}
 	
 	/**
-	 * Handles the client POST request to add a new ExerciseHistory
+	 * Handles the client's POST request to add a new ExerciseHistory
+	 * 
 	 * @param	exerciseHistory	an ExerciseHistory object sent by the client
 	 * @param 	auth			Authentication token sent by the client
 	 * @return					status message and HttpStatus
@@ -83,7 +85,8 @@ public class ExerciseHistoryController {
 	}
 	
 	/**
-	 * Handles the client DELETE request to delete an ExerciseHistory
+	 * Handles the client's DELETE request to delete an ExerciseHistory
+	 * 
 	 * @param	id	the id of the ExerciseHistory to be deleted
 	 * @return		status message and HttpStatus
 	 */	

@@ -23,12 +23,13 @@ public class ExerciseHistoryService {
 	
 	/**
 	 * Adds a new ExerciseHistory for a user to the database.
+	 * 
 	 * @param userId			user's id
 	 * @param userExerciseId	UserExercise's id
 	 * @param weight			weight
 	 * @param reps				reps
 	 * @param exercise_date		date
-	 * @throws JdbcException
+	 * @throws 					JdbcException
 	 */	
 	public void add(int userId, int userExerciseId, int weight, int reps, String exercise_date) throws JdbcException {
 		
@@ -40,9 +41,10 @@ public class ExerciseHistoryService {
 	}
 	
 	/**
-	 * Adds a new ExerciseHistory for a user to the database
+	 * Adds a new ExerciseHistory for a user to the database.
+	 * 
 	 * @param exerciseHistory	ExerciseHistory object
-	 * @throws JdbcException
+	 * @throws 					JdbcException
 	 */
 	public void add(ExerciseHistory exerciseHistory) throws JdbcException {
 		int userId = exerciseHistory.getUserId();
@@ -56,10 +58,11 @@ public class ExerciseHistoryService {
 	
 	/**
 	 * Gets a list of all the ExerciseHistory for a user on a specific date from the database.
+	 * 
 	 * @param userId			user's id
 	 * @param exercise_date		date
 	 * @return					list of all the ExerciseHistory on the specific date
-	 * @throws JdbcException
+	 * @throws 					JdbcException
 	 */	
 	public List<ExerciseHistory> getAll(int userId, String exercise_date) throws JdbcException {
 		List<ExerciseHistory> exerciseHistoryList = new ArrayList<ExerciseHistory>();
@@ -75,9 +78,10 @@ public class ExerciseHistoryService {
 	
 	/**
 	 * Deletes an ExerciseHistory using the id from the database. 
+	 * 
 	 * @param id	ExerciseHistory's id
-	 * @throws AppException 
-	 * @throws JdbcException
+	 * @throws 		AppException 
+	 * @throws 		JdbcException
 	 */
 	public void delete(int id) throws AppException, JdbcException {
 		boolean isDeleted = false;

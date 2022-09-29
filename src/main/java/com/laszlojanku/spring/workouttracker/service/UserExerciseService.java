@@ -30,10 +30,11 @@ public class UserExerciseService {
 	
 	/**
 	 * Adds a new UserExercise to a user to the database.
+	 * 
 	 * @param newExerciseName	new exercise's name
 	 * @param userId			user's id
-	 * @throws AppException
-	 * @throws JdbcException
+	 * @throws 					AppException
+	 * @throws 					JdbcException
 	 */
 	public void add(String newExerciseName, int userId) throws AppException, JdbcException {
 		// Validate new exercise name
@@ -57,9 +58,10 @@ public class UserExerciseService {
 	
 	/**
 	 * Gets all the UserExercise for a user from the database.
+	 * 
 	 * @param userId	user's id
 	 * @return			list of all the UserExercise for the user
-	 * @throws JdbcException
+	 * @throws 			JdbcException
 	 */
 	public List<UserExercise> getAll(int userId) throws JdbcException {
 		List<UserExercise> userExercises = null;
@@ -75,9 +77,10 @@ public class UserExerciseService {
 	
 	/**
 	 * Deletes a UserExercise by id from the database.
+	 * 
 	 * @param id	UserExercise's id
-	 * @throws JdbcException
-	 * @throws AppException
+	 * @throws 		JdbcException
+	 * @throws 		AppException
 	 */
 	public void delete(int id) throws JdbcException, AppException {
 		// First we need to delete the exercise from history (foreign key)

@@ -40,10 +40,11 @@ public class RegisterService {
 	
 	/**
 	 * Registers a new user using the RegisterForm.
+	 * 
 	 * @param	registerForm	RegisterForm object
 	 * @return					the new user's id
-	 * @throws AppException
-	 * @throws JdbcException
+	 * @throws 					AppException
+	 * @throws 					JdbcException
 	 */
 	public int register(RegisterForm registerForm) throws AppException, JdbcException  {
 		// Validate username

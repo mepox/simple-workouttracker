@@ -22,6 +22,7 @@ public class JdbcUserExerciseRepository implements UserExerciseRepository {
 	
 	/**
 	 * Adds a new UserExercise to the database.
+	 * 
 	 * @param	exerciseName	new exercise's name
 	 * @param	userId			user's id who owns this exercise
 	 * @throws					DataAccessException on database error
@@ -35,6 +36,7 @@ public class JdbcUserExerciseRepository implements UserExerciseRepository {
 	
 	/**
 	 * Gets all the UserExercises that belongs to a specific user from the database.
+	 * 
 	 * @param	userId	user's id
 	 * @return			list of all UserExercises that the user has
 	 * @throws			DataAccessException on database error
@@ -69,6 +71,7 @@ public class JdbcUserExerciseRepository implements UserExerciseRepository {
 	
 	/**
 	 * Checks if an exercise exists for a user in the database.
+	 * 
 	 * @param	exerciseName	exercise's name
 	 * @param	userId			user's id
 	 * @return					true if exists
@@ -85,6 +88,7 @@ public class JdbcUserExerciseRepository implements UserExerciseRepository {
 	
 	/**
 	 * Deletes a UserExercise by id from the database.
+	 * 
 	 * @param	id	UserExercise's id
 	 * @return		true if successful
 	 * @throws		DataAccessException on database error
@@ -100,6 +104,7 @@ public class JdbcUserExerciseRepository implements UserExerciseRepository {
 	
 	/**
 	 * Gets a UserExercise that belongs to a specific user from the database.
+	 * 
 	 * @param	exerciseName	exercise's name
 	 * @param	userId			user's id
 	 * @return					UserExercise
@@ -116,6 +121,7 @@ public class JdbcUserExerciseRepository implements UserExerciseRepository {
 	
 	/**
 	 * Gets a UserExercise that belongs to a specific user from the database.
+	 * 
 	 * @param	exerciseId		exercise's id
 	 * @param	userId			user's id
 	 * @return					UserExercise

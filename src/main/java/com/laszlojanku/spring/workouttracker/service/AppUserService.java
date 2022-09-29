@@ -20,10 +20,11 @@ public class AppUserService {
 	
 	/**
 	 * Gets an AppUser's id by username from the database.
-	 * @param	username	username
+	 * 
+	 * @param	username	username of the AppUser
 	 * @return				AppUser's id
-	 * @throws AppException
-	 * @throws JdbcException
+	 * @throws 				AppException
+	 * @throws 				JdbcException
 	 */
 	public int getId(String username) throws AppException, JdbcException {
 		AppUser appUser = null;
@@ -43,10 +44,11 @@ public class AppUserService {
 	
 	/**
 	 * Gets an AppUser by username from the database.
-	 * @param username	username
+	 * 
+	 * @param username	username of the AppUser
 	 * @return			AppUser 
-	 * @throws AppException
-	 * @throws JdbcException
+	 * @throws 			AppException
+	 * @throws 			JdbcException
 	 */	
 	public AppUser getAppUser(String username) throws AppException, JdbcException {
 		AppUser appUser = null;
@@ -66,22 +68,39 @@ public class AppUserService {
 	
 	/**
 	 * Calls the repository and checks if a username already exists or not.
-	 * @param username	username
+	 * 
+	 * @param username	username of the AppUser
 	 * @return			true if exists otherwise false
+	 * @throws			JdbcException
 	 */	
-	public boolean isExists(String username) {
-		return appUserRepository.isExists(username);
+	public boolean isExists(String username) throws JdbcException {
+		boolean result = false;
+		try {
+			result = appUserRepository.isExists(username); 
+		} catch (DataAccessException e) {
+			throw new JdbcException("Database error.");
+		}
+		
+		return result; 
 	}
 	
 	/**
 	 * Adds a new AppUser to the database.
-	 * @param username
-	 * @param password
-	 * @param rolename
-	 * @return the new AppUser's ID
+	 * 
+	 * @param username	username of the AppUser
+	 * @param password	password of the AppUser
+	 * @param rolename	rolename of the AppUser
+	 * @return 			new AppUser's ID
+	 * @throws 			JdbcException
 	 */	
-	public int add(String username, String password, String rolename) {
-		int userId = appUserRepository.add(username, password, rolename);
+	public int add(String username, String password, String rolename) throws JdbcException {
+		int userId = -1;
+		
+		try {
+			userId = appUserRepository.add(username, password, rolename);
+		} catch (DataAccessException e) {
+			throw new JdbcException("Database error.");
+		}
 		return userId;
 	}
 
