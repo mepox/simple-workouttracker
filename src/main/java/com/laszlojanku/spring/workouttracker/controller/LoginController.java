@@ -1,5 +1,7 @@
 package com.laszlojanku.spring.workouttracker.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.laszlojanku.spring.workouttracker.SimpleWorkoutTrackerApplication;
 import com.laszlojanku.spring.workouttracker.exception.AppException;
 import com.laszlojanku.spring.workouttracker.exception.JdbcException;
 import com.laszlojanku.spring.workouttracker.model.LoginForm;
@@ -18,6 +19,8 @@ import com.laszlojanku.spring.workouttracker.service.LoginService;
  */
 @RestController
 public class LoginController {
+	
+	private final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	@Autowired
 	private LoginService loginService;
@@ -30,7 +33,7 @@ public class LoginController {
 	 */	
 	@PostMapping("/login/perform_login")
 	public ResponseEntity<String> loginUser(@RequestBody LoginForm loginForm) {
-		SimpleWorkoutTrackerApplication.logger.info("Trying to login with: " + loginForm.toString());
+		logger.info("Trying to login with: " + loginForm.toString());
 		
 		try {
 			loginService.login(loginForm);

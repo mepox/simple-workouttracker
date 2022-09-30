@@ -2,12 +2,13 @@ package com.laszlojanku.spring.workouttracker.service;
 
 import java.time.LocalDate;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
-import com.laszlojanku.spring.workouttracker.SimpleWorkoutTrackerApplication;
 import com.laszlojanku.spring.workouttracker.model.RegisterForm;
 
 /**
@@ -15,6 +16,8 @@ import com.laszlojanku.spring.workouttracker.model.RegisterForm;
  */
 @Service
 public class StartupService {
+	
+	private final Logger logger = LoggerFactory.getLogger(StartupService.class);
 	
 	@Autowired
 	private RegisterService registerService;
@@ -25,7 +28,7 @@ public class StartupService {
 	@EventListener(ApplicationReadyEvent.class)
 	private void addDefaultUserAfterStartup() {
 		// Add a default user
-		SimpleWorkoutTrackerApplication.logger.info("Adding default user");
+		logger.info("Adding default user...");
 		try {
 			// Register the default user
 			int userId = registerService.register(new RegisterForm("user", "user", "user"));
@@ -38,7 +41,7 @@ public class StartupService {
 			exerciseHistoryService.add(userId, 2, 60, 11, LocalDate.now().toString());
 			exerciseHistoryService.add(userId, 2, 60, 10, LocalDate.now().toString());
 		} catch (Exception e) {			
-			SimpleWorkoutTrackerApplication.logger.warn("Error while trying to add the default user(s): " + e.getMessage());			
+			logger.warn("Error while trying to add the default user(s): " + e.getMessage());			
 		}
 	}
 
