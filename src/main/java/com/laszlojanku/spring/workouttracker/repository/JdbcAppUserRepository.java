@@ -79,7 +79,7 @@ public class JdbcAppUserRepository implements AppUserRepository {
 		
 		int count = jdbc.queryForObject(sql, Integer.class, username);
 		
-		return (count > 0) ? true : false;		
+		return (count > 0);		
 	}
 	
 	/**

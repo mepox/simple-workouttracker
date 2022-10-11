@@ -83,7 +83,7 @@ public class JdbcUserExerciseRepository implements UserExerciseRepository {
 		
 		int count = jdbc.queryForObject(sql, Integer.class, exerciseName, userId);
 		
-		return (count > 0) ? true : false;
+		return (count > 0);
 	}
 	
 	/**
@@ -99,7 +99,7 @@ public class JdbcUserExerciseRepository implements UserExerciseRepository {
 		
 		int rowsDeleted = jdbc.update(sql, id);		
 		
-		return (rowsDeleted > 0) ? true : false;
+		return (rowsDeleted > 0);
 	}
 	
 	/**
