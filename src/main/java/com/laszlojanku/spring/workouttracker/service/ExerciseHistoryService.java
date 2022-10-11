@@ -28,13 +28,13 @@ public class ExerciseHistoryService {
 	 * @param userExerciseId	UserExercise's id
 	 * @param weight			weight
 	 * @param reps				reps
-	 * @param exercise_date		date
+	 * @param exerciseDate		date
 	 * @throws 					JdbcException
 	 */	
-	public void add(int userId, int userExerciseId, int weight, int reps, String exercise_date) throws JdbcException {
+	public void add(int userId, int userExerciseId, int weight, int reps, String exerciseDate) throws JdbcException {
 		
 		try {
-			exerciseHistoryRepository.add(userId, userExerciseId, weight, reps, exercise_date);
+			exerciseHistoryRepository.add(userId, userExerciseId, weight, reps, exerciseDate);
 		} catch (DataAccessException e) {
 			throw new JdbcException("Database error. Couldn't add new exercise to the history.");
 		}
@@ -51,24 +51,24 @@ public class ExerciseHistoryService {
 		int userExerciseId = exerciseHistory.getUserExerciseId();
 		int weight = exerciseHistory.getWeight();
 		int reps = exerciseHistory.getReps();
-		String exercise_date = exerciseHistory.getDate();
+		String exerciseDate = exerciseHistory.getDate();
 		
-		add(userId, userExerciseId, weight, reps, exercise_date);
+		add(userId, userExerciseId, weight, reps, exerciseDate);
 	}
 	
 	/**
 	 * Gets a list of all the ExerciseHistory for a user on a specific date from the database.
 	 * 
 	 * @param userId			user's id
-	 * @param exercise_date		date
+	 * @param exerciseDate		date
 	 * @return					list of all the ExerciseHistory on the specific date
 	 * @throws 					JdbcException
 	 */	
-	public List<ExerciseHistory> getAll(int userId, String exercise_date) throws JdbcException {
+	public List<ExerciseHistory> getAll(int userId, String exerciseDate) throws JdbcException {
 		List<ExerciseHistory> exerciseHistoryList = new ArrayList<ExerciseHistory>();
 		
 		try {
-			exerciseHistoryList = exerciseHistoryRepository.getAll(userId, exercise_date);
+			exerciseHistoryList = exerciseHistoryRepository.getAll(userId, exerciseDate);
 		} catch (DataAccessException e) {
 			throw new JdbcException("Database error. Couldn't get the exercises from the history.");
 		}

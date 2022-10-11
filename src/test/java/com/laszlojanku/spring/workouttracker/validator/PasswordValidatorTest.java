@@ -12,13 +12,13 @@ import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class PasswordValidatorTest {
+class PasswordValidatorTest {
 	
 	@InjectMocks
 	private PasswordValidator passwordValidator;
 	
 	@Test
-	public void validate_ContainsSpace_ReturnsFalse() {
+	void validate_ContainsSpace_ReturnsFalse() {
 		String password = "pass pass";
 		
 		boolean actual = passwordValidator.validate(password).isValid();
@@ -28,7 +28,7 @@ public class PasswordValidatorTest {
 	
 	@ParameterizedTest
 	@MethodSource("com.laszlojanku.spring.workouttracker.validator.SpecialCharsProvider#getSpecials")
-	public void validate_ContainsSpecial_ReturnsFalse(String specialChar) {
+	void validate_ContainsSpecial_ReturnsFalse(String specialChar) {
 		String password = "password" + specialChar;		
 		
 		boolean actual = passwordValidator.validate(password).isValid();
@@ -37,7 +37,7 @@ public class PasswordValidatorTest {
 	}
 	
 	@Test
-	public void validate_ValidPassword_ReturnsTrue() {
+	void validate_ValidPassword_ReturnsTrue() {
 		String password = "password123";
 		
 		boolean actual = passwordValidator.validate(password).isValid();
@@ -48,7 +48,7 @@ public class PasswordValidatorTest {
 	// min 4, max 16
 	
 	@Test
-	public void validate_TooShort_ReturnsFalse() {
+	void validate_TooShort_ReturnsFalse() {
 		String password = "pas"; // <4
 		
 		boolean actual = passwordValidator.validate(password).isValid();
@@ -57,7 +57,7 @@ public class PasswordValidatorTest {
 	}
 	
 	@Test
-	public void validate_TooLong_ReturnsFalse() {
+	void validate_TooLong_ReturnsFalse() {
 		String password = "passwordpasswordp"; // >16
 		
 		boolean actual = passwordValidator.validate(password).isValid();
@@ -67,14 +67,14 @@ public class PasswordValidatorTest {
 	
 	@ParameterizedTest
 	@NullAndEmptySource
-	public void validate_NullOrEmpty_ReturnsFalse(String password) {
+	void validate_NullOrEmpty_ReturnsFalse(String password) {
 		boolean actual = passwordValidator.validate(password).isValid();
 		
 		assertFalse(actual);			
 	}
 	
 	@Test
-	public void validate_ContainsCapitalLetters_ReturnTrue() {
+	void validate_ContainsCapitalLetters_ReturnTrue() {
 		String password = "PassWord123";
 		
 		boolean actual = passwordValidator.validate(password).isValid();

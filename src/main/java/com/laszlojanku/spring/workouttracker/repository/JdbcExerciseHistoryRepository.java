@@ -29,32 +29,32 @@ public class JdbcExerciseHistoryRepository implements ExerciseHistoryRepository 
 	 * @param userExerciseId	UserExercise's id
 	 * @param weight			weight
 	 * @param reps				reps
-	 * @param exercise_date		date
+	 * @param exerciseDate		date
 	 * @throws 					JdbcException
 	 */	
 	@Override
-	public void add(int userId, int userExerciseId, int weight, int reps, String exercise_date) throws DataAccessException {
+	public void add(int userId, int userExerciseId, int weight, int reps, String exerciseDate) throws DataAccessException {
 		String sql = "INSERT INTO exercise_history (userId, userExerciseId, weight, reps, exercise_date) VALUES (?, ?, ?, ?, ?)";
 		
-		jdbc.update(sql, userId, userExerciseId, weight, reps, exercise_date);
+		jdbc.update(sql, userId, userExerciseId, weight, reps, exerciseDate);
 	}
 	
 	/**
 	 * Gets a list of all the ExerciseHistory for a user on a specific date from the database.
 	 * 
 	 * @param userId			user's id
-	 * @param exercise_date		date
+	 * @param exerciseDate		date
 	 * @return					list of all the ExerciseHistory on the specific date
 	 * @throws 					JdbcException
 	 */	
 	@Override
-	public List<ExerciseHistory> getAll(int userId, String exercise_date) throws DataAccessException {
+	public List<ExerciseHistory> getAll(int userId, String exerciseDate) throws DataAccessException {
 		List<ExerciseHistory> exerciseHistoryList = new ArrayList<ExerciseHistory>();
 		List<Map<String, Object>> mapList = new ArrayList<Map<String, Object>>();
 		
 		String sql = "SELECT * FROM exercise_history WHERE userId = ? AND exercise_date = ?";
 		
-		mapList = jdbc.queryForList(sql, userId, exercise_date);
+		mapList = jdbc.queryForList(sql, userId, exerciseDate);
 		
 		if (mapList != null) {
 			for (Map<String, Object> map : mapList) {
@@ -91,7 +91,7 @@ public class JdbcExerciseHistoryRepository implements ExerciseHistoryRepository 
 		
 		int rowsDeleted = jdbc.update(sql, id);
 		
-		return (rowsDeleted > 0) ? true : false;
+		return (rowsDeleted > 0);
 	}
 	
 	/**
@@ -107,7 +107,7 @@ public class JdbcExerciseHistoryRepository implements ExerciseHistoryRepository 
 		
 		int rowsDeleted = jdbc.update(sql, exerciseId);
 		
-		return (rowsDeleted > 0) ? true : false;		
+		return (rowsDeleted > 0);		
 	}
 
 }

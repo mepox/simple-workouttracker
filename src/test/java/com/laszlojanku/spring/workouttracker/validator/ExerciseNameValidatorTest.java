@@ -12,13 +12,13 @@ import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class ExerciseNameValidatorTest {
+class ExerciseNameValidatorTest {
 	
 	@InjectMocks
 	private ExerciseNameValidator exerciseNameValidator;
 	
 	@Test
-	public void validate_ContainsNumber_ReturnsFalse() {
+	void validate_ContainsNumber_ReturnsFalse() {
 		String name = "exercise1";
 		
 		boolean actual = exerciseNameValidator.validate(name).isValid();
@@ -28,7 +28,7 @@ public class ExerciseNameValidatorTest {
 	
 	@ParameterizedTest
 	@MethodSource("com.laszlojanku.spring.workouttracker.validator.SpecialCharsProvider#getSpecials")
-	public void validate_ContainsSpecialChars_ReturnFalse(String specialChar) {
+	void validate_ContainsSpecialChars_ReturnFalse(String specialChar) {
 		// Append the word "exercise" to the beginning
 		String name = "exercise" + specialChar;
 		
@@ -40,7 +40,7 @@ public class ExerciseNameValidatorTest {
 	// min 4, max 32
 	
 	@Test
-	public void validate_TooShort_ReturnsFalse() {
+	void validate_TooShort_ReturnsFalse() {
 		String name = "exe"; // <4
 		
 		boolean actual = exerciseNameValidator.validate(name).isValid();
@@ -49,7 +49,7 @@ public class ExerciseNameValidatorTest {
 	}
 	
 	@Test
-	public void validate_TooLong_ReturnsFalse() {
+	void validate_TooLong_ReturnsFalse() {
 		String name = "exerciseexerciseexerciseexercisee"; // >32
 		
 		boolean actual = exerciseNameValidator.validate(name).isValid();
@@ -59,14 +59,14 @@ public class ExerciseNameValidatorTest {
 	
 	@ParameterizedTest
 	@NullAndEmptySource
-	public void validate_NullOrEmpty_ReturnsFalse(String name) {
+	void validate_NullOrEmpty_ReturnsFalse(String name) {
 		boolean actual = exerciseNameValidator.validate(name).isValid();
 		
 		assertFalse(actual);
 	}
 	
 	@Test
-	public void validate_ContainsSpace_ReturnTrue() {
+	void validate_ContainsSpace_ReturnTrue() {
 		String name = "exercise exercise exercise";
 		
 		boolean actual = exerciseNameValidator.validate(name).isValid();
@@ -75,7 +75,7 @@ public class ExerciseNameValidatorTest {
 	}
 	
 	@Test
-	public void validate_ContainsSpaceAndNumbers_ReturnFalse() {
+	void validate_ContainsSpaceAndNumbers_ReturnFalse() {
 		String name = "exercise1 exercise2 exercise3";
 		
 		boolean actual = exerciseNameValidator.validate(name).isValid();
@@ -84,7 +84,7 @@ public class ExerciseNameValidatorTest {
 	}
 	
 	@Test
-	public void validate_ContainsCapitalLetters_ReturnTrue() {
+	void validate_ContainsCapitalLetters_ReturnTrue() {
 		String name = "Exercise Exercise Exercise";
 		
 		boolean actual = exerciseNameValidator.validate(name).isValid();
