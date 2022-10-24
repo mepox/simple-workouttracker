@@ -1,3 +1,5 @@
+# *** Project has been re-worked, please visit [FitBuddy](https://github.com/mepox/fitbuddy) ***
+
 # Workout Tracker app
 
 Workout Tracker app made with Spring Boot.
